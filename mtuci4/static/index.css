@@ -42,7 +42,7 @@ a {
 .introduction button {
     position: absolute;
     left: 50%;
-    top: 95vh;
+    top: 92vh;
     transform: translateX(-50%);
 
     margin: 5px;
@@ -58,6 +58,10 @@ a {
     transition-duration: 0.5s;
 }
 
+.topic-container {
+    max-width: 70%; 
+    margin: 0 auto;    
+}
 
 @media (max-width: 1000px) {
     .introduction {
@@ -74,21 +78,14 @@ a {
         width: 100%;
     }
     .introduction button {
+        display: block;
+        transform: none;
         position: static;
-        text-align: center;
-        margin: 0 auto;
-        top: 20px;
+        margin: 20px auto;
     }
-}
-
-.main {
-    height: 100%;
-    text-align: justify;
-    width: 80%;
-    position: relative;
-    left: 50%;
-    padding-top: 30px;
-    transform: translateX(-50%);
+    .topic-container {
+        max-width: 85%;    
+    }
 }
 
 .topics__ul {
@@ -108,10 +105,17 @@ a {
     border-style: solid;
 
     background-color: black;
+
+    transition-duration: 0.5s;
 }
 
 h3.topics__title {
     text-align: center;
+}
+
+.topic-entrance { /* THIS SHIT DOESN'T WORK!! */
+    display: flex;
+    height: 100%;
 }
 
 #tracker-tab {
@@ -126,5 +130,15 @@ h3.topics__title {
 }
 
 .topics__ul li:hover {
-    
+    border-color: rgb(243, 152, 0);
+}
+
+.topic-entrance:hover {
+    font-size: 16pt;
+    transition-duration: 0.5s;
+}
+
+.topic-entrance:not(:hover) {
+    font-size: 15pt;
+    transition-duration: 0.5s;
 }
