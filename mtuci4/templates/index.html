@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 	<head>
@@ -8,7 +9,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 		<link href="/static/css/font-awesome.min.css" title="makaba" type="text/css" rel="stylesheet">
-		<link href="/static/css/index.css?1" type="text/css" rel="stylesheet">
+		<link href="{% static 'index.css' %}" type="text/css" rel="stylesheet"> <!-- хз если оно правильно подключилось -->
 		<link href="/static/css/threadsubscribe.css?13" type="text/css" rel="stylesheet">
 	</head>
 	<body>
@@ -25,144 +26,7 @@
 			</section>
 			
 			<section class="main__block boards">
-				
-				<div class="boards__col">
-					<ul class="boards__ul">
-						<li class="boards__title">Тематика</li>
-						<li><a href="/au/">Автомобили</a></li>
-						<li><a href="/bi/">Велосипеды</a></li>
-						<li><a href="/biz/">Бизнес</a> </li>
-						<li><a href="/bo/">Книги</a> </li>
-						<li><a href="/c/">Комиксы</a></li>
-						<li><a href="/cc/">Криптовалюты</a></li>
-						<li><a href="/em/">Другие страны</a> </li>
-						<li><a href="/fa/">Мода и стиль</a></li>
-						<li><a href="/fiz/">Физкультура</a></li>
-						<li><a href="/fl/">Ин.языки</a></li>
-						<li><a href="/ftb/">Футбол</a></li>
-						<li><a href="/hi/">История</a></li>
-						<li><a href="/me/">Медицина</a></li>
-						<li><a title="магия" href="/mg/">Магия</a></li>
-						<li><a href="/mlp/">Пони</a></li>
-						<li><a href="/mo/">Мотоциклы</a></li>
-						<li><a href="/mov/">Фильмы</a></li>
-						<li><a href="/mu/">Музыка</a></li>
-						<li><a href="/ne/">Животные</a></li>
-						<li><a href="/psy/">Психология</a></li>
-						<li><a href="/re/">Религия</a></li>
-						<li><a href="/sci/">Наука</a></li>
-						<li><a href="/sf/">Науч. фантастика</a></li>
-						
-					</ul>
-				</div>
-				<div class="boards__col">
-					<ul class="boards__ul">
-						<li><a href="/sn/">Паранормальное</a></li>
-						<li><a href="/sp/">Спорт</a></li>
-						<li><a href="/spc/">Космос</a></li>
-						<li><a href="/tv/">Сериалы</a></li>
-						<li><a href="/un/">Образование</a></li>
-						<li><a href="/w/">Оружие</a></li>
-						<li><a href="/wh/">Warhammer</a></li>
-						<li><a href="/wm/">Военная техника</a></li>
-						<li><a href="/wp/">Обои и хайрез</a></li>
-						<li><a href="/zog/">Теории заговора</a></li>
-						<br>
-						<li class="boards__title">Творчество</li>
-						<li><a href="/de/">Дизайн</a></li>
-						<li><a href="/di/">Столовая</a></li>
-						<li><a href="/diy/">Хобби</a></li>
-						<li><a href="/izd/">Графомания</a></li>
-						<li><a href="/mus/">Музыканты</a></li>
-						<li><a href="/pa/">Живопись</a></li>
-						<li><a href="/p/">Фотография</a></li>
-						<li><a href="/wrk/">Работа</a></li>
-						
-						<br>
-						<li class="boards__title">Политика и новости</li>
-						<li><a href="/po/">Политика</a></li>
-						<li><a href="/news/">Новости</a></li>
-						<li><a href="/int/">International</a></li>
-						<li><a href="/hry/">Х Р Ю</a></li>
-						<br>
-					</ul>
-				</div>
-				<div class="boards__col">
-					<ul class="boards__ul">
-						<li class="boards__title">Техника и софт</li>
-						<li><a href="/ai/">Искусственный интеллект</a></li>
-						<li><a href="/gd/">Gamedev</a></li>
-						<li><a href="/hw/">Комп. железо</a></li>
-						<li><a href="/mobi/">Моб. устройства</a></li>
-						<li><a href="/pr/">Программирование</a></li>
-						<li><a href="/ra/">Радиотехника</a></li>
-						<li><a href="/s/">Программы</a></li>
-						<li><a href="/t/">Техника</a></li>
-						
-						<br>
-						<li class="boards__title">Игры</li>
-						<li><a href="/bg/">Настольные игры</a></li>
-						<li><a href="/cg/">Консоли</a></li>
-						<li><a href="/gacha/">Гача-игры</a></li>
-						<li><a href="/gsg/">Grand Strategy Games</a></li>
-						<li><a href="/ruvn/">RU виз.новеллы</a></li>
-						<li><a href="/tes/">The Elder Scrolls</a></li>
-						<li><a href="/v/">Video Games</a></li>
-						<li><a href="/vg/">Video Games General</a></li>
-						<li><a href="/wr/">Текстовые РПГ</a></li>
-						<br>
-						<li class="boards__title">Взрослым <span style="font-size:10px; color:red;"> (18+)</span></li>
-
-						<li><a href="/gg/">Красивые девушки</a></li>
-
-						<li><a href="/sex/">Секс и отношения</a></li>
-						<li><a href="/fag/">Фагготрия</a></li>
-						<br>
-						<script type="text/javascript" src="https://vk.com/js/api/openapi.js?169"></script>
-						
-						<div id="vk_groups"></div>
-						<script type="text/javascript">
-							
-							
-							
-							
-							
-							
-						</script>
-					</ul>
-				</div>
-				<div class="boards__col">
-					<ul class="boards__ul">
-						<li class="boards__title">Японская культура</li>
-						<li><a href="/a/">Аниме</a></li>
-						<li><a href="/fd/">Фэндом</a></li>
-						<li><a href="/ja/">Японская культура</a></li>
-						<li><a href="/ma/">Манга</a></li>
-						<li><a href="/vn/">Виз-ые новеллы</a></li>
-						<br>
-						<li class="boards__title">Разное  <span style="font-size:10px; color:red;"> (18+)</span></li>
-						<li><a href="/d/">Дискуссии о Два.ч</a></li>
-						<li><a href="/b/">Бред</a></li>
-						<li><a href="/soc/">Общение</a></li>
-						<li><a href="/media/">Анимация</a></li>
-						<li><a href="/r/">Реквесты</a></li>
-						<li><a href="/api.yml">API</a></li>
-						<li><a href="/rf/">Убежище</a></li>
-						<li><a href="/o/">Рисовач</a></li>
-						<br>
-						<li class="otherboards"><a href="/static/userboards.html">Прочие доски</a></li>
-						<li class="otherboards"><font color="red"><a href="//tv.2ch.hk">ТИВАЧ</a></font></li>
-						<li class="otherboards"><font color="red"><a href="//t.me/dvachannel">TG-Двач</a></font></li>
-					<br>
-						<li class="boards__title">Новые доски</li>
-						<li><a href="/man/">Мужикач</a></li>
-						<li><a href="/ai/">Искусственный интеллект</a></li>
-						<li><a href="/nf/">NeuroFap <span style="font-size:10px; color:red;"> (18+)</span></a></li>
-						
-					</ul>
-				</div>
-			
-				
+                {% include 'topics/topics.html' %}
 			</section>
 			<section class="main__block news">
 				<header class="main__title">Новости

@@ -1,3 +1,53 @@
 body {
-    
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    background-color: black;
+    padding: 1px;
+    outline-style: solid;
+    justify-content: center;
+    color: aliceblue;
+}
+
+header ul {
+    list-style: none;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+.main__meta {
+    height: 100%;
+    text-align: justify;
+    width: 80%;
+    position: relative;
+    left: 50%;
+    padding-top: 30px;
+    transform: translateX(-50%);
+}
+
+.topics__ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 10px;
+    list-style: none;
+}
+
+.topics__ul li {
+    margin: 5px;
+    padding: 5px;
+    padding-top: 10px;
+
+    border-radius: 10px;
+    border-style: solid;
+
+}
+
+h3.topics__title {
+    text-align: center;
 }
