@@ -1,26 +1,87 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-header {
-    display: flex;
+a {
+    text-decoration: none;
+    color: rgb(243, 152, 0);
+}
+
+.introduction {
+    display: block;
+    min-height: 100vh;
+    padding: 1px 100px;
     background-color: black;
-    padding: 1px;
     outline-style: solid;
     justify-content: center;
     color: aliceblue;
 }
 
-header ul {
-    list-style: none;
-    align-items: center;
-    gap: 10px;
-    width: fit-content;
+.introduction-flex {
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
 }
 
-.main__meta {
+.introduction-logo {
+    height: auto;
+    width: 50%;
+    object-fit: contain;
+}
+
+.introduction-text {
+    width: 30%;
+}
+
+.introduction button {
+    position: absolute;
+    left: 50%;
+    top: 95vh;
+    transform: translateX(-50%);
+
+    margin: 5px;
+    padding: 5px;
+
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(243, 152, 0);
+    background-color: black;
+    color: whitesmoke;
+    font-size: 24pt;
+
+    transition-duration: 0.5s;
+}
+
+
+@media (max-width: 1000px) {
+    .introduction {
+        height: auto;
+    }
+    .introduction-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+    .introduction-logo {
+        width: 100%;
+    }
+    .introduction-text {
+        width: 100%;
+    }
+    .introduction button {
+        position: static;
+        text-align: center;
+        margin: 0 auto;
+        top: 20px;
+    }
+}
+
+.main {
     height: 100%;
     text-align: justify;
     width: 80%;
@@ -46,8 +107,24 @@ header ul {
     border-radius: 10px;
     border-style: solid;
 
+    background-color: black;
 }
 
 h3.topics__title {
     text-align: center;
+}
+
+#tracker-tab {
+    position: absolute;
+}
+
+
+
+
+.introduction button:hover {
+    background-color: rgb(243, 152, 0);
+}
+
+.topics__ul li:hover {
+    
 }
