@@ -1,8 +1,8 @@
 <div class="topics">
+    <h3 class="topics__title">Тематика</h3>
     <ul class="topics__ul">
-        <h3 class="topics__title">Тематика</h3>
-            {% for topic in topics %}
-                <li><a href=/{{ topic.slug }}>{{ topic.title }}</a></li>
-            {% endfor %}
+        {% for topic in topics %}
+            <li><a href=/{{ topic.slug }}>{{ topic.title }}</a></li>
+        {% endfor %}
     </ul>
 </div>
