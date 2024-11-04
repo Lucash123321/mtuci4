@@ -6,5 +6,3 @@ from topics import models
 class TopicAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
     prepopulated_fields = {'slug': ('title',)}
-
-
