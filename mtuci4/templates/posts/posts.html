@@ -1,53 +1,41 @@
-{% for post in posts %}
-    <div>{{ post.title }}</div>
-    <div>{{ post.description }}</div>
-{% endfor %}
+{% include "posts/base.html" %}
+{% if posts %}
+    <ul class="posts">
+        {% for post in posts %}
+            {% if not post.is_comment %}
+            <li class="post">
+                <a href="{% url 'posts:post_detail' topic.slug post.post.topic_post_id %}">{{ post.post.title }}</a>
+                <p class="upvotes" data-post-id="{{ post.post.topic_post_id }}" data-type="post">Upvotes: {{ post.post.upvotes }}</p>
+                <p class="downvotes" data-post-id="{{ post.post.topic_post_id }}" data-type="post">Downvotes: {{ post.post.downvotes }}</p>
+                <form action="{% url 'posts:vote_post' topic.slug post.post.topic_post_id 'up' %}" method="post" class="vote-form" data-post-id="{{ post.post.topic_post_id }}" data-type="post">
+                    {% csrf_token %}
+                    <button
+                        type="submit"
+                        class="vote-button {% if post.post.user_vote_type == 'up' %}selected{% endif %}"
+                        data-vote-type="up">
+                        Upvote
+                    </button>
+                </form>
+                <form action="{% url 'posts:vote_post' topic.slug post.post.topic_post_id 'down' %}" method="post" class="vote-form" data-post-id="{{ post.post.topic_post_id }}" data-type="post">
+                    {% csrf_token %}
+                    <button
+                        type="submit"
+                        class="vote-button {% if post.post.user_vote_type == 'down' %}selected{% endif %}"
+                        data-vote-type="down">
+                        Downvote
+                    </button>
+                </form>
+                <p>{{ post.post.description }}</p>
+                <small>{{ post.post.date }}</small>
 
-<article class="post">
-<div class="post-title">Название поста</div>
-<div class="post-content">Текст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст поста</div>
-<span class="post-extend">Читать полностью...</span>
-<div class="post-buttons">
-    <button class="like-button">Лайк</button>
-    <button class="comment-button">Комментировать</button>
-</div>
-</article>
+                {% include "posts/comments.html" with comments=post.comments %}
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
-<article class="post">
-    <div class="post-title">Название поста</div>
-    <div class="post-content">Текст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст поста</div>
-    <div class="post-buttons">
-        <button class="like-button">Лайк</button>
-        <button class="comment-button">Комментировать</button>
-    </div>
-</article>
-
-<article class="post">
-    <div class="post-title">Название поста</div>
-    <div class="post-content">Текст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст поста</div>
-    <div class="post-buttons">
-        <button class="like-button">Лайк</button>
-        <button class="comment-button">Комментировать</button>
-    </div>
-</article>
-
-<article class="post">
-    <div class="post-title">Название поста</div>
-    <div class="post-content">Текст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст поста</div>
-    <div class="post-buttons">
-        <button class="like-button">Лайк</button>
-        <button class="comment-button">Комментировать</button>
-    </div>
-</article>
-
-<article class="post">
-    <div class="post-title">Название поста</div>
-    <div class="post-content">Текст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст постаТекст поста</div>
-    <div class="post-buttons">
-        <button class="like-button">Лайк</button>
-        <button class="comment-button">Комментировать</button>
-    </div>
-</article>
+    {% include "posts/vote.html" %}
     
-
-
+{% else %}
+    <p>Нет постов в данном топике.</p>
+{% endif %}
