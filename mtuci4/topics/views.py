@@ -5,10 +5,10 @@ from posts.views import get_full_post
 
 
 # Create your views here.
-def main(request):
-    topics = Topic.objects.all()
-    context = {'topics': topics}
-    return render(request, "index.html", context=context)
+# def main(request):
+#     topics = Topic.objects.all()
+#     context = {'topics': topics}
+#     return render(request, "index.html", context=context)
 
 def topic(request, slug):
     topic = Topic.objects.get(slug=slug)

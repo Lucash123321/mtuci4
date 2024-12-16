@@ -59,7 +59,7 @@ def create_comment(request, topic_slug, id):
         form = CommentForm()
     return render(request, 'posts/create_comment.html', {'form': form})
 
-def post_detail(request, topic_slug, id):
+def post_detail(request, topic_slug, id, **kwargs):
     topic = Topic.objects.get(slug=topic_slug)
     post = Post.objects.get(topic_post_id=id, topic=topic)
     user_vote = post.votes.filter(user=request.user).first()
@@ -73,6 +73,10 @@ def post_detail(request, topic_slug, id):
         'downvotes': downvotes,
         'comments': get_nested_comments(request, post),
     })
+    
+    # topics = Topic.objects.all()
+    # context = {'topics': topics}
+    # return render(request, "index.html", context=context)
 
 def get_nested_comments(request, comment):
     nested_comments = []
