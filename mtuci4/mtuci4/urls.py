@@ -24,4 +24,5 @@ urlpatterns = [
     path('', views.main, name='main'),
     path('', include("users.urls", namespace='users')),
     path('', include("topics.urls", namespace='topics')),
+    path('comments/', include("comments.urls", namespace='comments')),
 ]

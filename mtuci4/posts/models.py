@@ -5,19 +5,18 @@ from topics.models import Topic
 
 # Create your models here.
 class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="post_author", on_delete=models.CASCADE)
-    topic = models.ForeignKey(Topic, related_name="post_topic", on_delete=models.CASCADE)
-    topic_post_id = models.PositiveIntegerField(blank=True, null=True)
+    topic = models.ForeignKey(Topic, related_name="posts", on_delete=models.CASCADE)
+    topic_post_id = models.PositiveIntegerField(editable=False, unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="posts", on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    description = models.TextField()
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name='comments', null=True, blank=True)
+    text = models.TextField()
     date = models.DateTimeField(default=now)
+    
+    def __str__(self):
+        return f"Post by {self.user} on {self.topic} by "
 
     class Meta:
         unique_together = ('topic', 'topic_post_id')
-    
-    def is_comment(self):
-        return self.parent is not None
 
     def save(self, *args, **kwargs):
         if not self.topic_post_id:

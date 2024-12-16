@@ -7,8 +7,8 @@
     </head>
     <body>
         <h1>{{ post.title }}</h1>
-        <p>{{ post.description }}</p>
-        <p>Автор: {{ post.author }} | {{ post.date }}</p>
+        <p>{{ post.text }}</p>
+        <p>Автор: {{ post.user }} | {{ post.date }}</p>
 
         <h2>Голоса</h2>
         <p class="upvotes" data-post-id="{{ post.post.topic_post_id }}" data-type="post">Upvotes: {{ upvotes }}</p>
@@ -33,7 +33,7 @@
         </form>
 
         <h2>Комментарии</h2>
-        {% include "posts/comments.html" with comments=comments %}
+        {% include "posts/comments.html" with comments=post.comments.all %}
 
         <form method="post">
             {% csrf_token %}
