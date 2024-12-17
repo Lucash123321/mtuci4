@@ -3,26 +3,21 @@
     {% for comment in comments %}
         <li class="comment">
             <p>{{ comment.text }}</p>
-            <p class="upvotes" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">Upvotes: {{ comment.upvotes }}</p>
-            <p class="downvotes" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">Downvotes: {{ comment.downvotes }}</p>
-            {% comment %} <form action="{% url 'comments:vote_comment' comment.id 'up' %}" method="post" class="vote-form" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">
+            <form action="{% url 'scores:vote_scores' "comment" comment.id %}" data-get-url="{% url 'scores:get_scores' "comment" comment.id %}" method="post" class="vote-form">
                 {% csrf_token %}
-                <button
+                <input
                     type="submit"
-                    class="vote-button {% if comment.user_vote_type == 'up' %}selected{% endif %}"
-                    data-vote-type="up">
-                    Upvote
-                </button>
+                    name="vote_type"
+                    class="vote-button"
+                    value="up" />
+                <span class="upvotes"></span>
+                <input
+                    type="submit"
+                    name="vote_type"
+                    class="vote-button"
+                    value="down" />
+                <span class="downvotes"></span>
             </form>
-            <form action="{% url 'comments:vote_comment' comment.id 'down' %}" method="post" class="vote-form" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">
-                {% csrf_token %}
-                <button
-                    type="submit"
-                    class="vote-button {% if comment.user_vote_type == 'down' %}selected{% endif %}"
-                    data-vote-type="down">
-                    Downvote
-                </button>
-            </form> {% endcomment %}
             <small>{{ comment.date }}</small>
             {% include "posts/replies.html" with replies=comment.replies.all %}
         </li>

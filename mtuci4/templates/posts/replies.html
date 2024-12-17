@@ -3,26 +3,21 @@
     {% for reply in replies %}
         <li class="comment">
             <p>{{ reply.text }}</p>
-            <p class="upvotes" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">Upvotes: {{ reply.upvotes }}</p>
-            <p class="downvotes" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">Downvotes: {{ reply.downvotes }}</p>
-            {% comment %} <form action="{% url 'comments:vote_comment' reply.id 'up' %}" method="post" class="vote-form" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">
+            <form action="{% url 'scores:vote_scores' "comment" reply.id %}" data-get-url="{% url 'scores:get_scores' "comment" reply.id %}" method="post" class="vote-form">
                 {% csrf_token %}
-                <button
+                <input
                     type="submit"
-                    class="vote-button {% if reply.user_vote_type == 'up' %}selected{% endif %}"
-                    data-vote-type="up">
-                    Upvote
-                </button>
+                    name="vote_type"
+                    class="vote-button"
+                    value="up" />
+                <span class="upvotes"></span>
+                <input
+                    type="submit"
+                    name="vote_type"
+                    class="vote-button"
+                    value="down" />
+                <span class="downvotes"></span>
             </form>
-            <form action="{% url 'comments:vote_comment' reply.id 'down' %}" method="post" class="vote-form" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">
-                {% csrf_token %}
-                <button
-                    type="submit"
-                    class="vote-button {% if reply.user_vote_type == 'down' %}selected{% endif %}"
-                    data-vote-type="down">
-                    Downvote
-                </button>
-            </form> {% endcomment %}
             <small>{{ reply.date }}</small>
             
         </li>

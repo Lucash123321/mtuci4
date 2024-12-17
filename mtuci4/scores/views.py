@@ -16,17 +16,19 @@ def get_scores(request, parent_type, id):
         downvotes = object.votes.filter(vote_type='down').count()
         print(upvotes, downvotes)
         return JsonResponse({'upvotes': upvotes, 'downvotes': downvotes})
-    return JsonResponse({"parent_type": parent_type, "id": id})
+    
+    return JsonResponse({"code": 400})
 
 def vote_scores(request, parent_type, id):
     if request.method == "POST":
         vote_type = request.POST.get('vote_type')
         
         if parent_type == "post":
-            post = Post.objects.get(id=id)
-            vote, created = Score.objects.get_or_create(post=post, user=request.user)
+            object = Post.objects.get(id=id)
+            vote, created = Score.objects.get_or_create(post=object, user=request.user)
         elif parent_type == "comment":
-            pass
+            object = Comment.objects.get(id=id)
+            vote, created = Score.objects.get_or_create(comment=object, user=request.user)
         
         if not created and vote.vote_type == vote_type:
             vote.delete()
@@ -34,9 +36,12 @@ def vote_scores(request, parent_type, id):
             vote.vote_type = vote_type
             vote.save()
         
-        upvotes = post.votes.filter(post=post, vote_type='up').count()
-        downvotes = post.votes.filter(post=post, vote_type='down').count()
+        upvotes = object.votes.filter(vote_type='up').count()
+        downvotes = object.votes.filter(vote_type='down').count()
+        
         return JsonResponse({'upvotes': upvotes, 'downvotes': downvotes})
+    
+    return JsonResponse({"code": 400})
     
     
     

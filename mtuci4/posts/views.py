@@ -27,44 +27,6 @@ def edit_post(request):  # for moderators only | upd by maksanik: "maybe for use
 def delete_post(request):  # for moderators only | upd by maksanik: "maybe for user who created too?"
     pass
 
-def vote_post(request, topic_slug, id):
-    topic = Topic.objects.get(slug=topic_slug)
-    post = Post.objects.get(topic_post_id=id, topic=topic)
-
-    if request.method == "POST":
-        vote_type = request.POST.get('vote_type')
-        vote, created = Score.objects.get_or_create(post=post, user=request.user)
-        
-        if not created and vote.vote_type == vote_type:
-            vote.delete()
-        else:            
-            vote.vote_type = vote_type
-            vote.save()
-        
-        upvotes = post.votes.filter(post=post, vote_type='up').count()
-        downvotes = post.votes.filter(post=post, vote_type='down').count()
-        return JsonResponse({'upvotes': upvotes, 'downvotes': downvotes})
-    
-    elif request.method == "GET":
-        upvotes = post.votes.filter(post=post, vote_type='up').count()
-        downvotes = post.votes.filter(post=post, vote_type='down').count()
-        return JsonResponse({'upvotes': upvotes, 'downvotes': downvotes})
-        
-    return JsonResponse({"code": 400})
-
-def get_user_vote(request, topic_slug, id):
-    if request.method == "POST":
-        current_user = request.user
-        topic = Topic.objects.get(slug=topic_slug)
-        post = Post.objects.get(topic=topic, topic_post_id=id)
-        try:
-            current_score = Score.objects.get(user=current_user, post=post)
-        except Score.DoesNotExist:
-            current_score = None
-        
-        print(current_score)
-        return JsonResponse({})
-
 def post_detail(request, topic_slug, id):
     topic = Topic.objects.get(slug=topic_slug)
     post = Post.objects.get(topic=topic, topic_post_id=id,)
