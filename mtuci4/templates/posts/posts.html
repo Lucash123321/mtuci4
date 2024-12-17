@@ -1,3 +1,4 @@
+{% load static %}
 {% include "posts/base.html" %}
 {% if posts %}
     <ul class="posts">
@@ -35,7 +36,7 @@
         {% endfor %}
     </ul>
 
-    {% include "posts/vote.html" %}
+    <script src="{% static "js/vote.js" %}"></script>
     
 {% else %}
     <p>Нет постов в данном топике.</p>
