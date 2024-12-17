@@ -1,33 +1,31 @@
 {% if comments %}
-    <ul class="comments">
-        {% for comment in comments %}
-            <li class="comment">
-                <a href="{% url 'posts:post_detail' topic.slug comment.comment.topic_post_id %}">{{ comment.comment.title }}</a>
-                <p class="upvotes" data-comment-id="{{ comment.comment.topic_post_id }}" data-type="comment">Upvotes: {{ comment.comment.upvotes }}</p>
-                <p class="downvotes" data-comment-id="{{ comment.comment.topic_post_id }}" data-type="comment">Downvotes: {{ comment.comment.downvotes }}</p>
-                <form action="{% url 'posts:vote_post' topic.slug comment.comment.topic_post_id 'up' %}" method="post" class="vote-form" data-comment-id="{{ comment.comment.topic_post_id }}" data-type="comment">
-                    {% csrf_token %}
-                    <button
-                        type="submit"
-                        class="vote-button {% if comment.comment.user_vote_type == 'up' %}selected{% endif %}"
-                        data-vote-type="up">
-                        Upvote
-                    </button>
-                </form>
-                <form action="{% url 'posts:vote_post' topic.slug comment.comment.topic_post_id 'down' %}" method="post" class="vote-form" data-comment-id="{{ comment.comment.topic_post_id }}" data-type="comment">
-                    {% csrf_token %}
-                    <button
-                        type="submit"
-                        class="vote-button {% if comment.comment.user_vote_type == 'down' %}selected{% endif %}"
-                        data-vote-type="down">
-                        Downvote
-                    </button>
-                </form>
-                <p>{{ comment.comment.description }}</p>
-                <small>{{ comment.comment.date }}</small>
-
-                {% include "posts/comments.html" with comments=comment.nested_comments %}
-            </li>
-        {% endfor %}
-    </ul>
+<ul class="comments">
+    {% for comment in comments %}
+        <li class="comment">
+            <p>{{ comment.text }}</p>
+            <p class="upvotes" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">Upvotes: {{ comment.upvotes }}</p>
+            <p class="downvotes" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">Downvotes: {{ comment.downvotes }}</p>
+            <form action="{% url 'comments:vote_comment' comment.id 'up' %}" method="post" class="vote-form" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">
+                {% csrf_token %}
+                <button
+                    type="submit"
+                    class="vote-button {% if comment.user_vote_type == 'up' %}selected{% endif %}"
+                    data-vote-type="up">
+                    Upvote
+                </button>
+            </form>
+            <form action="{% url 'comments:vote_comment' comment.id 'down' %}" method="post" class="vote-form" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">
+                {% csrf_token %}
+                <button
+                    type="submit"
+                    class="vote-button {% if comment.user_vote_type == 'down' %}selected{% endif %}"
+                    data-vote-type="down">
+                    Downvote
+                </button>
+            </form>
+            <small>{{ comment.date }}</small>
+            {% include "posts/replies.html" with replies=comment.replies.all %}
+        </li>
+    {% endfor %}
+</ul>
 {% endif %}

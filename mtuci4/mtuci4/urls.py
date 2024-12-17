@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from mtuci4 import views # Хз почему нет подсветки, какой-то баг
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("topics.urls", namespace='topics')),
+    path('test_urls/', views.test_urls),
+    path('', views.main, name='main'),
     path('', include("users.urls", namespace='users')),
-    path('', include("posts.urls", namespace='posts')),
+    path('', include("topics.urls", namespace='topics')),
+    path('comments/', include("comments.urls", namespace='comments')),
 ]
