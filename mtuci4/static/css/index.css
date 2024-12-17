@@ -116,6 +116,7 @@ h3.topics__title {
 .topic-entrance { /* THIS SHIT DOESN'T WORK!! */
     display: flex;
     height: 100%;
+    font-size: 15pt;
 }
 
 #tracker-tab {
@@ -134,11 +135,11 @@ h3.topics__title {
 }
 
 .topic-entrance:hover {
-    font-size: 16pt;
+    transform: scale(1.05);
     transition-duration: 0.5s;
 }
 
 .topic-entrance:not(:hover) {
-    font-size: 15pt;
+    transform: scale(0.95);
     transition-duration: 0.5s;
 }

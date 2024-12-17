@@ -20,12 +20,12 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.upvotes !== undefined && data.downvotes !== undefined) {
-                            const parentElement = form.parentNode;
+                            const parentElement = form.parentNode || form.closest(".vote-section");
                             const upvoteButton = parentElement.querySelector(".vote-button[data-vote-type='up']");
                             const downvoteButton = parentElement.querySelector(".vote-button[data-vote-type='down']");
 
-                            parentElement.querySelector(".upvotes").textContent = `Upvotes: ${data.upvotes}`;
-                            parentElement.querySelector(".downvotes").textContent = `Downvotes: ${data.downvotes}`;
+                            parentElement.querySelector(".upvotes").textContent = `${data.upvotes}`;
+                            parentElement.querySelector(".downvotes").textContent = `${data.downvotes}`;
 
                             if (data.removed) {
                                 upvoteButton.dataset.selected = false;
