@@ -7,21 +7,21 @@
             <li class="post">
                 <a href="{% url 'topics:posts:post_detail' topic.slug post.topic_post_id %}">{{ post.title }}</a>
                 <p>{{ post.text }}</p>
-                <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id %}" method="post" class="vote-form" data-post-id="{{ post.topic_post_id }}" data-type="post">
-                    {% csrf_token %}
-                    <input
-                        type="submit"
-                        name="vote_type"
-                        class="vote-button"
-                        value="up" />
-                    <span class="upvotes"></span>
-                    <input
-                        type="submit"
-                        name="vote_type"
-                        class="vote-button"
-                        value="down" />
-                    <span class="downvotes"></span>
-                </form>
+                    <form action="{% url 'scores:vote_scores' "post" post.id %}" data-get-url="{% url 'scores:get_scores' "post" post.id %}" method="post" class="vote-form">
+                        {% csrf_token %}
+                        <input
+                            type="submit"
+                            name="vote_type"
+                            class="vote-button"
+                            value="up" />
+                        <span class="upvotes"></span>
+                        <input
+                            type="submit"
+                            name="vote_type"
+                            class="vote-button"
+                            value="down" />
+                        <span class="downvotes"></span>
+                    </form>
                 <p>{{ post.description }}</p>
                 <small>{{ post.date }}</small>
 

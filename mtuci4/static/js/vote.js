@@ -7,11 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     voteForms.forEach(function (form) {
-        const url = form.action; // Получаем URL для запроса (из атрибута action формы)
+        const url = form.dataset.getUrl;
         
-        // Получаем текущие данные о голосах
         fetch(url, {
-            method: "GET", // Используем GET для запроса текущих данных
+            method: "GET",
             headers: {
                 "X-CSRFToken": form.querySelector("[name=csrfmiddlewaretoken]").value,
             }
