@@ -21,7 +21,10 @@ def create_post(request):
         form = PostForm()
     return render(request, 'posts/create_post.html', {'form': form})
 
-def delete_post(request):  # for moderators only
+def edit_post(request):  # for moderators only | upd by maksanik: "maybe for user who created too?"
+    pass
+
+def delete_post(request):  # for moderators only | upd by maksanik: "maybe for user who created too?"
     pass
 
 def vote_post(request, topic_slug, id, vote_type):

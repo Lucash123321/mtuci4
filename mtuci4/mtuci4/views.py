@@ -1,5 +1,4 @@
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Count, Q, Prefetch
+from django.shortcuts import render
 from posts.models import Topic
 
 

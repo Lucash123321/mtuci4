@@ -4,8 +4,9 @@ from posts import views
 app_name = "posts"
 
 urlpatterns = [
-    path('create/', views.create_post, name='create_post'),
+    path('create/<int:id>', views.create_post, name='create_post'),
+    path('edit/<int:id>', views.edit_post, name='edit_post'),
+    path('delete/<int:id>', views.delete_post, name='delete_post'),
     path('<int:id>/', views.post_detail, name='post_detail'),
     path('<int:id>/vote/<str:vote_type>/', views.vote_post, name='vote_post'),
-    # path('<int:id>/comment/', views.create_comment, name='add_comment'), переехало в comments
 ]
