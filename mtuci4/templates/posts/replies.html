@@ -5,7 +5,7 @@
             <p>{{ reply.text }}</p>
             <p class="upvotes" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">Upvotes: {{ reply.upvotes }}</p>
             <p class="downvotes" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">Downvotes: {{ reply.downvotes }}</p>
-            <form action="{% url 'comments:vote_comment' reply.id 'up' %}" method="post" class="vote-form" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">
+            {% comment %} <form action="{% url 'comments:vote_comment' reply.id 'up' %}" method="post" class="vote-form" data-reply-id="{{ reply.topic_post_id }}" data-type="reply">
                 {% csrf_token %}
                 <button
                     type="submit"
@@ -22,7 +22,7 @@
                     data-vote-type="down">
                     Downvote
                 </button>
-            </form>
+            </form> {% endcomment %}
             <small>{{ reply.date }}</small>
             
         </li>

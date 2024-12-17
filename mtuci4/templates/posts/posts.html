@@ -6,25 +6,21 @@
             {% if not post.is_comment %}
             <li class="post">
                 <a href="{% url 'topics:posts:post_detail' topic.slug post.topic_post_id %}">{{ post.title }}</a>
-                <p class="upvotes" data-post-id="{{ post.topic_post_id }}" data-type="post">Upvotes: {{ post.upvotes }}</p>
-                <p class="downvotes" data-post-id="{{ post.topic_post_id }}" data-type="post">Downvotes: {{ post.downvotes }}</p>
-                <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id 'up' %}" method="post" class="vote-form" data-post-id="{{ post.topic_post_id }}" data-type="post">
+                <p>{{ post.text }}</p>
+                <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id %}" method="post" class="vote-form" data-post-id="{{ post.topic_post_id }}" data-type="post">
                     {% csrf_token %}
-                    <button
+                    <input
                         type="submit"
-                        class="vote-button {% if post.user_vote_type == 'up' %}selected{% endif %}"
-                        data-vote-type="up">
-                        Upvote
-                    </button>
-                </form>
-                <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id 'down' %}" method="post" class="vote-form" data-post-id="{{ post.topic_post_id }}" data-type="post">
-                    {% csrf_token %}
-                    <button
+                        name="vote_type"
+                        class="vote-button"
+                        value="up" />
+                    <span class="upvotes"></span>
+                    <input
                         type="submit"
-                        class="vote-button {% if post.user_vote_type == 'down' %}selected{% endif %}"
-                        data-vote-type="down">
-                        Downvote
-                    </button>
+                        name="vote_type"
+                        class="vote-button"
+                        value="down" />
+                    <span class="downvotes"></span>
                 </form>
                 <p>{{ post.description }}</p>
                 <small>{{ post.date }}</small>
