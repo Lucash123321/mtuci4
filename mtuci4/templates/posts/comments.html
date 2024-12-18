@@ -4,18 +4,22 @@
         <li class="comment">
             <p>{{ comment.text }}</p>
             <form action="{% url 'scores:vote_scores' "comment" comment.id %}" data-get-url="{% url 'scores:get_scores' "comment" comment.id %}" method="post" class="vote-form">
-                {% csrf_token %}
-                <input
+            {% csrf_token %}
+                <button
                     type="submit"
                     name="vote_type"
-                    class="vote-button"
-                    value="up" />
+                    value="up"
+                    class="vote-button">
+                    ▲
+                </button>
                 <span class="upvotes"></span>
-                <input
+                <button
                     type="submit"
                     name="vote_type"
-                    class="vote-button"
-                    value="down" />
+                    value="down"
+                    class="vote-button">
+                    ▼
+                </button>
                 <span class="downvotes"></span>
             </form>
             <small>{{ comment.date }}</small>

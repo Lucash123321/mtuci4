@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
             let user_vote = data.user_vote;
             let pressed_button;
             if (user_vote == "up") {
-                pressed_button = form.querySelector("input[value='up']")
+                pressed_button = form.querySelector("button[value='up']")
             } else if (user_vote == "down") {
-                pressed_button = form.querySelector("input[value='down']")
+                pressed_button = form.querySelector("button[value='down']")
             }
 
             if (pressed_button) pressed_button.classList.add("selected");

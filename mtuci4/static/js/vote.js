@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const voteType = pressed_button.value;
             
             let other_button;
-            if (voteType === "up") other_button = pressed_button.parentNode.querySelector("input[value='down']");
-            else if (voteType === "down") other_button = pressed_button.parentNode.querySelector("input[value='up']");
+            if (voteType === "up") other_button = pressed_button.parentNode.querySelector("button[value='down']");
+            else if (voteType === "down") other_button = pressed_button.parentNode.querySelector("button[value='up']");
             
             
             pressed_button.classList.toggle("selected");
