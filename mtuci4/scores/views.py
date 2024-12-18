@@ -9,13 +9,19 @@ def get_scores(request, parent_type, id):
     if request.method == "GET":
         if parent_type == "post":
             object = Post.objects.get(id=id)
+            user_vote = Score.objects.filter(user=request.user, post=object).first()
         elif parent_type == "comment":
             object = Comment.objects.get(id=id)
-            
+            user_vote = Score.objects.filter(user=request.user, comment=object).first()
+        
+        user_vote = user_vote.vote_type if user_vote else user_vote
+        
+        print(user_vote)
+        
         upvotes = object.votes.filter(vote_type='up').count()
         downvotes = object.votes.filter(vote_type='down').count()
-        print(upvotes, downvotes)
-        return JsonResponse({'upvotes': upvotes, 'downvotes': downvotes})
+        
+        return JsonResponse({'upvotes': upvotes, 'downvotes': downvotes, 'user_vote': user_vote})
     
     return JsonResponse({"code": 400})
 

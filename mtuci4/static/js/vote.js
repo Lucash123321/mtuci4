@@ -1,36 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
     const voteForms = document.querySelectorAll(".vote-form");
 
-    function updateVoteCounts(form, upvotes, downvotes) {
-        form.querySelector(".upvotes").textContent = `${upvotes}`;
-        form.querySelector(".downvotes").textContent = `${downvotes}`;
-    }
-
-    voteForms.forEach(function (form) {
-        const url = form.dataset.getUrl;
-        
-        fetch(url, {
-            method: "GET",
-            headers: {
-                "X-CSRFToken": form.querySelector("[name=csrfmiddlewaretoken]").value,
-            }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data); // Логируем данные для проверки
-            // Обновляем количество голосов
-            updateVoteCounts(form, data.upvotes, data.downvotes);
-        })
-        .catch((error) => console.error('Ошибка загрузки данных:', error));
-    });
-
     voteForms.forEach(function (form) {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
             const url = form.action;
             const csrfToken = form.querySelector("[name=csrfmiddlewaretoken]").value;
-            const voteType = event.submitter.value;
+            let pressed_button = event.submitter;
+            const voteType = pressed_button.value;
+            
+            let other_button;
+            if (voteType === "up") other_button = pressed_button.parentNode.querySelector("input[value='down']");
+            else if (voteType === "down") other_button = pressed_button.parentNode.querySelector("input[value='up']");
+            
+            
+            pressed_button.classList.toggle("selected");
+            other_button.classList.remove("selected");
 
             const formData = new FormData();
             formData.append('vote_type', voteType);
@@ -44,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     form.querySelector(".upvotes").textContent = `${data.upvotes}`;
                     form.querySelector(".downvotes").textContent = `${data.downvotes}`;
                 })
