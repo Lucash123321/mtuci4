@@ -30,19 +30,19 @@ body {
 }
 
 .post-header h1 {
-    font-size: 18pt;
+    font-size: 24px;
     margin: 0;
     color: rgb(243, 152, 0);
 }
 
 .post-header h2 {
-    font-size: 24pt;
+    font-size: 32px;
     margin: 10px 0 5px;
     padding-bottom: 20px;
 }
 
 .post-meta {
-    font-size: 12pt;
+    font-size: 16px;
 }
 
 .post-content {
@@ -64,12 +64,13 @@ body {
     padding: 10px;
     border-radius: 50px;
     border: 2px solid aliceblue;
+    background-color: rgba(0, 0, 0, 0.3);
     max-width: 150px;
     max-height: 20px;
 }
 
 .vote-section .upvotes, .vote-section .downvotes {
-    font-size: 10pt;
+    font-size: 13px;
     font-weight: bold;
     word-wrap: break-word;
     white-space: nowrap;
