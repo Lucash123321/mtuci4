@@ -24,8 +24,8 @@
                             const upvoteButton = parentElement.querySelector(".vote-button[data-vote-type='up']");
                             const downvoteButton = parentElement.querySelector(".vote-button[data-vote-type='down']");
 
-                            parentElement.querySelector(".upvotes").textContent = `Upvotes: ${data.upvotes}`;
-                            parentElement.querySelector(".downvotes").textContent = `Downvotes: ${data.downvotes}`;
+                            parentElement.querySelector(".upvotes").textContent = `${data.upvotes}`;
+                            parentElement.querySelector(".downvotes").textContent = `${data.downvotes}`;
 
                             if (data.removed) {
                                 upvoteButton.dataset.selected = false;

@@ -53,7 +53,7 @@ a {
     border-color: rgb(243, 152, 0);
     background-color: black;
     color: whitesmoke;
-    font-size: 24pt;
+    font-size: 32px;
 
     transition-duration: 0.5s;
 }
@@ -113,9 +113,10 @@ h3.topics__title {
     text-align: center;
 }
 
-.topic-entrance { /* THIS SHIT DOESN'T WORK!! */
+.topic-entrance {
     display: flex;
     height: 100%;
+    font-size: 20px;
 }
 
 #tracker-tab {
@@ -134,11 +135,11 @@ h3.topics__title {
 }
 
 .topic-entrance:hover {
-    font-size: 16pt;
+    transform: scale(1.05);
     transition-duration: 0.5s;
 }
 
 .topic-entrance:not(:hover) {
-    font-size: 15pt;
+    transform: scale(0.95);
     transition-duration: 0.5s;
 }

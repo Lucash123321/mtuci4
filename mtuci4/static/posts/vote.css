@@ -1,15 +1,18 @@
 .vote-button.selected {
-    background-color: rgb(243, 152, 0);
+    color: rgb(243, 152, 0);
+    font-weight: bold;
 }
 
 .vote-button {
-    background-color: whitesmoke;
-    color: black;
-    border: 1px solid black;
-    padding: 5px 10px;
+    font-size: 21px;
+    font-weight: normal;
+    background-color: transparent;
+    color: aliceblue;
+    border: none;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .vote-button:hover {
-    background-color: wheat;
+    color: wheat;
 }

@@ -1,45 +1,61 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     {% include "posts/base.html" %}
+    {% include "header.html" %}
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'posts/post_detail.css' %}">
         <title>{{ topic.slug }}: {{ post.title }}</title>
     </head>
     <body>
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text }}</p>
-        <p>Автор: {{ post.user }} | {{ post.date }}</p>
+        <h1>{{ topic.slug }}</h1>
+        <div class="container">
+            <div class="post-header">
+                <h2 class="post-header">{{ post.title }}</h2>
+                <p class="post-meta">Автор: {{ post.user }} | {{ post.date }}</p>
+            </div>
 
-        <h2>Голоса</h2>
-        <p class="upvotes" data-post-id="{{ post.post.topic_post_id }}" data-type="post">Upvotes: {{ upvotes }}</p>
-        <p class="downvotes" data-post-id="{{ post.post.topic_post_id }}" data-type="post">Downvotes: {{ downvotes }}</p>
-        <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id 'up' %}" method="post" class="vote-form" data-comment-id="{{ post.topic_post_id }}" data-type="post">
-            {% csrf_token %}
-            <button
-                type="submit"
-                class="vote-button {% if post.user_vote_type == 'up' %}selected{% endif %}"
-                data-vote-type="up">
-                Upvote
-            </button>
-        </form>
-        <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id 'down' %}" method="post" class="vote-form" data-comment-id="{{ post.topic_post_id }}" data-type="post">
-            {% csrf_token %}
-            <button
-                type="submit"
-                class="vote-button {% if post.user_vote_type == 'down' %}selected{% endif %}"
-                data-vote-type="down">
-                Downvote
-            </button>
-        </form>
+            <div class="post-text">
+                <p>{{ post.text }}</p>
+            </div>
 
-        <h2>Комментарии</h2>
-        {% include "posts/comments.html" with comments=post.comments.all %}
+            <div class="vote-section">
+                <div class="vote-buttons">
+                    <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id 'up' %}" method="post" class="vote-form" data-comment-id="{{ post.topic_post_id }}" data-type="post">
+                        {% csrf_token %}
+                        <button
+                            type="submit"
+                            class="vote-button {% if post.user_vote_type == 'up' %}selected{% endif %}"
+                            data-vote-type="up">
+                            ▲
+                        </button>
+                    </form>
+                    <span class="vote-count upvotes" data-post-id="{{ post.post.topic_post_id }}" data-type="post">{{ upvotes }}</span>
+                    <form action="{% url 'topics:posts:vote_post' topic.slug post.topic_post_id 'down' %}" method="post" class="vote-form" data-comment-id="{{ post.topic_post_id }}" data-type="post">
+                        {% csrf_token %}
+                        <button
+                            type="submit"
+                            class="vote-button {% if post.user_vote_type == 'down' %}selected{% endif %}"
+                            data-vote-type="down">
+                            ▼
+                        </button>
+                    </form>
+                    <p class="vote-count downvotes" data-post-id="{{ post.post.topic_post_id }}" data-type="post">{{ downvotes }}</span>
+                </div>
+            </div>
 
-        <form method="post">
-            {% csrf_token %}
-            <!-- TODO: Добавить форму -->
-            <button type="submit">Добавить комментарий</button>
-        </form>
+            <div class="comment-section">
+                <h2>Комментарии</h2>
+                {% include "posts/comments.html" with comments=post.comments.all %}
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <!-- TODO: Добавить форму -->
+                <button type="submit">Добавить комментарий</button>
+            </form>
+        </div>
     </body>
 
     {% include "posts/vote.html" %}
