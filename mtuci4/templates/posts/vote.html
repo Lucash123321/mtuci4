@@ -20,7 +20,7 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.upvotes !== undefined && data.downvotes !== undefined) {
-                            const parentElement = form.parentNode || form.closest(".vote-section");
+                            const parentElement = form.parentNode;
                             const upvoteButton = parentElement.querySelector(".vote-button[data-vote-type='up']");
                             const downvoteButton = parentElement.querySelector(".vote-button[data-vote-type='down']");
 
