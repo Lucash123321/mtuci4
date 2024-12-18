@@ -1,0 +1,105 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+    color: aliceblue;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgb(33, 12, 0);
+    padding: 20px;
+    border-radius: 8px;
+    border: 8px solid rgb(243, 152, 0);
+    box-shadow: 10px 6px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+
+.post-header {
+    border-bottom: 4px dotted rgb(243, 152, 0);
+}
+
+.post-header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: rgb(243, 152, 0);
+}
+
+.post-header h2 {
+    font-size: 32px;
+    margin: 10px 0 5px;
+    padding-bottom: 20px;
+}
+
+.post-meta {
+    font-size: 16px;
+}
+
+.post-content {
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+
+
+
+
+
+.vote-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 50px;
+    border: 2px solid aliceblue;
+    background-color: rgba(0, 0, 0, 0.3);
+    max-width: 150px;
+    max-height: 20px;
+}
+
+.vote-section .upvotes, .vote-section .downvotes {
+    font-size: 13px;
+    font-weight: bold;
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+
+.vote-buttons {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+
+
+
+
+.comment-section {
+    margin-top: 40px;
+}
+
+.comment-section h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+}
