@@ -3,25 +3,24 @@
     {% for comment in comments %}
         <li class="comment">
             <p>{{ comment.text }}</p>
-            <p class="upvotes" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">Upvotes: {{ comment.upvotes }}</p>
-            <p class="downvotes" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">Downvotes: {{ comment.downvotes }}</p>
-            <form action="{% url 'comments:vote_comment' comment.id 'up' %}" method="post" class="vote-form" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">
-                {% csrf_token %}
+            <form action="{% url 'scores:vote_scores' "comment" comment.id %}" data-get-url="{% url 'scores:get_scores' "comment" comment.id %}" method="post" class="vote-form">
+            {% csrf_token %}
                 <button
                     type="submit"
-                    class="vote-button {% if comment.user_vote_type == 'up' %}selected{% endif %}"
-                    data-vote-type="up">
-                    Upvote
+                    name="vote_type"
+                    value="up"
+                    class="vote-button">
+                    ▲
                 </button>
-            </form>
-            <form action="{% url 'comments:vote_comment' comment.id 'down' %}" method="post" class="vote-form" data-comment-id="{{ comment.topic_post_id }}" data-type="comment">
-                {% csrf_token %}
+                <span class="upvotes"></span>
                 <button
                     type="submit"
-                    class="vote-button {% if comment.user_vote_type == 'down' %}selected{% endif %}"
-                    data-vote-type="down">
-                    Downvote
+                    name="vote_type"
+                    value="down"
+                    class="vote-button">
+                    ▼
                 </button>
+                <span class="downvotes"></span>
             </form>
             <small>{{ comment.date }}</small>
             {% include "posts/replies.html" with replies=comment.replies.all %}
