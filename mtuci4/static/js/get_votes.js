@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const voteForms = document.querySelectorAll(".vote-form");
 
     function updateVoteCounts(form, upvotes, downvotes) {

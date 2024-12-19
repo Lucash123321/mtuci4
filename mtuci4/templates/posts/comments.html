@@ -4,7 +4,8 @@
 
     <form action="{% url 'comments:create_comment' %}" 
         method="post" 
-        class="create-comment-form">
+        class="create-comment-form"
+        data-parent-type="post">
         {% csrf_token %}
         <textarea class="adaptive-textarea" name="comment" placeholder="Добавить комментарий..."></textarea>
         <button type="sumbit">Отправить</button>
@@ -17,6 +18,7 @@
             <form action="{% url 'comments:delete_comment' comment.id %}" 
                 method="post" 
                 class="delete-comment-form">
+                
                 {% csrf_token %}
                 <button type="sumbit">Удалить</button>
             </form>
@@ -37,9 +39,11 @@
 
             <form action="{% url 'comments:create_comment' %}" 
                 method="post" 
-                class="create-comment-form">
+                class="create-comment-form"
+                data-parent-type="comment"
+                >
                 {% csrf_token %}
-                <textarea class="adaptive-textarea" name="comment" placeholder="Ответить"></textarea>
+                <textarea class="adaptive-textarea" name="comment" placeholder="Ответить..."></textarea>
                 <button type="sumbit">Ответить</button>
             </form>
             

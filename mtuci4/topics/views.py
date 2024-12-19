@@ -15,7 +15,7 @@ def topic(request, slug):
     
     context = {
         'topic': topic, 
-        'posts': posts
+        'posts': sorted(posts, reverse=True, key=lambda x: x.id)
     }
 
     return render(request, 'topics/topic.html', context=context)
