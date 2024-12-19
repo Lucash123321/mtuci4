@@ -44,7 +44,7 @@ def delete_post(request, topic_slug, post_id):  # for moderators only | upd by m
         return JsonResponse({'code': 403})
 
     post.delete()
-    return redirect('topic:posts', topic_slug=topic_slug)
+    return JsonResponse({'code': 200})
 
 
 def post_detail(request, topic_slug, id):

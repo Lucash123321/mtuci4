@@ -36,6 +36,7 @@ def edit_comment(request, comment_id):
 
     comment.text = request.POST.text
     comment.save()
+    return JsonResponse({"code": 200})
 
 @login_required()
 def delete_comment(request, comment_id):
@@ -44,6 +45,7 @@ def delete_comment(request, comment_id):
         return JsonResponse({"code": 403})
 
     comment.delete()
+    return JsonResponse({"code": 200})
 
 @login_required
 def vote_comment(request, id, vote_type):
