@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from comments.models import Comment
 from scores.models import Score
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -26,17 +27,33 @@ def create_comment(request):
 #         form = CommentForm()
 #     return render(request, 'posts/create_comment.html', {'form': form})
 
-def edit_comment(request):
-    pass
 
-def delete_comment(request):
-    pass
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.user != Comment.user:
+        return JsonResponse({"code": 403})
 
+    comment.text = request.POST.text
+    comment.save()
+    return JsonResponse({"code": 200})
+
+@login_required()
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.user != Comment.user:
+        return JsonResponse({"code": 403})
+
+    comment.delete()
+    return JsonResponse({"code": 200})
+
+@login_required
 def vote_comment(request, id, vote_type):
+
     if request.method != "POST":
         return JsonResponse({"code": 405})
-    
-    comment = Comment.objects.get(id=id)
+
+    comment = get_object_or_404(Comment, id=id)
     vote, created = Score.objects.get_or_create(comment=comment, user=request.user)
     removed = False
     if not created and vote.vote_type == vote_type:

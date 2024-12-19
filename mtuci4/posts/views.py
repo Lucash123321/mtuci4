@@ -1,11 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.db.models import Count, Q
 from posts.forms import CommentForm, PostForm
 from posts.models import Post
-from scores.models import Score
+from django.http import JsonResponse
 from topics.models import Topic
+
 
 # TODO: Адаптировать к текущим реалиям
 @login_required
@@ -21,11 +20,32 @@ def create_post(request):
         form = PostForm()
     return render(request, 'posts/create_post.html', {'form': form})
 
-def edit_post(request):  # for moderators only | upd by maksanik: "maybe for user who created too?"
-    pass
 
-def delete_post(request):  # for moderators only | upd by maksanik: "maybe for user who created too?"
-    pass
+@login_required
+def edit_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
+    topic = Topic.objects.get(slug=topic_slug)
+    post = Post.objects.get(topic=topic, topic_post_id=post_id)
+
+    if not post.user == request.user:
+        return JsonResponse({'code': 403})
+
+    post.title = request.POST.title
+    post.text = request.POST.text
+    post.save()
+    return JsonResponse({'code': 200})
+
+
+@login_required
+def delete_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
+    topic = Topic.objects.get(slug=topic_slug)
+    post = Post.objects.get(topic=topic, topic_post_id=post_id)
+
+    if post.user == request.user:
+        return JsonResponse({'code': 403})
+
+    post.delete()
+    return JsonResponse({'code': 200})
+
 
 def post_detail(request, topic_slug, id):
     topic = Topic.objects.get(slug=topic_slug)
