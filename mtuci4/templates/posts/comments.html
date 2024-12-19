@@ -1,20 +1,24 @@
 {% load static %}
 <div class="comment-section">
     
-
+    <!-- ОТПРАВИТЬ КОММЕНТАРИЙ К ПОСТУ -->
     <form action="{% url 'comments:create_comment' %}" 
         method="post" 
         class="create-comment-form"
-        data-parent-type="post">
+        data-parent-type="post"
+        data-parent-id="{{ post.id }}">
         {% csrf_token %}
         <textarea class="adaptive-textarea" name="comment" placeholder="Добавить комментарий..."></textarea>
         <button type="sumbit">Отправить</button>
     </form>
+    
 {% if comments %}
 <ul class="comments">
     {% for comment in comments %}
     <div>   
         <li class="comment">
+            
+            <!-- КРУТАЯ КНОПКА -->
             <form action="{% url 'comments:delete_comment' comment.id %}" 
                 method="post" 
                 class="delete-comment-form">
@@ -24,9 +28,14 @@
             </form>
             <button class="show-edit-elements">Редактировать</button>
             <div class="comment-header">
+
+            <!-- ПОЛЬЗОВАТЕЛЬСКИЕ ДАННЫЕ -->
+
             <img />
             <small>{{ comment.user.username }}</small>
             </div>
+
+            <!-- РЕДАКТИРОВАНИЕ КОММЕНТАРИЯ -->
             <form action="{% url 'comments:edit_comment' comment.id %}" 
                 method="post" 
                 class="edit-comment-form">
@@ -35,13 +44,16 @@
             <textarea class="adaptive-textarea hidden" name="comment">{{ comment.text }}</textarea>
             <button type="sumbit" class="submit-button hidden">Применить</button>
             </form>
+            
+            <!-- ЛАЙКИ И ДИЗЛАЙКИ -->
             {% include "posts/vote_form.html" with type='comment' %}
 
+            <!-- ОТВЕТИТЬ НА КОММЕНТАРИЙ -->
             <form action="{% url 'comments:create_comment' %}" 
                 method="post" 
                 class="create-comment-form"
                 data-parent-type="comment"
-                >
+                data-parent-id="{{ comment.id }}">
                 {% csrf_token %}
                 <textarea class="adaptive-textarea" name="comment" placeholder="Ответить..."></textarea>
                 <button type="sumbit">Ответить</button>
