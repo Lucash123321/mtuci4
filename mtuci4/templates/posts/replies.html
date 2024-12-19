@@ -1,7 +1,11 @@
 {% if replies %}
-<ul class="replies">
+<ul class="comments">
     {% for reply in replies %}
         <li class="comment">
+            <div class="comment-header">
+            <img />
+            <small>{{ comment.user.username }}</small>
+            </div>
             <p>{{ reply.text }}</p>
             
             {% include "posts/vote_form.html" with type='reply' %}
