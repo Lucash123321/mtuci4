@@ -11,7 +11,6 @@ body {
 }
 
 a {
-    text-decoration: none;
     color: rgb(243, 152, 0);
 }
 
@@ -26,54 +25,12 @@ a {
 .topic-title {
     display: block;
     text-align: center;
-    background-color: rgb(243, 152, 0);
-    border: 5px solid rgb(129, 58, 0);
+    background-color: rgb(33, 12, 0);
+    border: 8px solid rgb(243, 152, 0);
     border-left: none;
     border-right: none;
     color: white;
     padding: 10px;
-}
-
-.post {
-    display: block;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 20px;
-    padding: 20px;
-    border: 3px solid rgb(243, 152, 0);
-}
-
-.post-title {
-    font-size: 1.2em;
-    font-weight: 700;
-}
-
-.post-extend {
-    display: inline-block;
-    cursor: pointer;
-    text-decoration: underline;
-    color: #6e6e6e;
-    margin-top: 10px;
-}
-
-.post-buttons {
-    margin-top: 20px;
-}
-
-.post-buttons button {
-    display: inline-block;
-    color: white;
-    background-color: rgb(243, 152, 0);
-    padding: 8px;
-    margin-right: 10px;
-    border-radius: 15px;
-
-    font-size: 1.3em;
-    font-weight: 700;
-}
-
-.post-buttons button:hover {
-    filter: opacity(0.8);
 }
 
 @media (max-width: 1000px) {

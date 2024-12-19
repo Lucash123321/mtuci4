@@ -1,6 +1,6 @@
 <article class="post-container">
     <div class="post-header">
-        <h2 class="post-header">{{ post.title }}</h2>
+        <h2 class="post-header"><a href="{% url 'topics:posts:post_detail' topic.slug post.topic_post_id %}">{{ post.title }}</a></h2>
         <p class="post-meta">Автор: {{ post.user }} | {{ post.date }}</p>
     </div>
 
@@ -9,28 +9,7 @@
     </div>
 
     <div class="vote-section">
-        <form action="{% url 'scores:vote_scores' 'post' post.id %}" 
-            data-get-url="{% url 'scores:get_scores' 'post' post.id %}" 
-            method="post" 
-            class="vote-form vote-buttons">
-            {% csrf_token %}
-            <button
-                type="submit"
-                name="vote_type"
-                value="up"
-                class="vote-button">
-                ▲
-            </button>
-            <span class="upvotes"></span>
-            <button
-                type="submit"
-                name="vote_type"
-                value="down"
-                class="vote-button">
-                ▼
-            </button>
-            <span class="downvotes"></span>
-        </form>
+        {% include "posts/vote_form.html" with type='post' %}
     </div>
 
     <div class="comment-section">

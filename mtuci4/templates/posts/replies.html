@@ -3,25 +3,9 @@
     {% for reply in replies %}
         <li class="comment">
             <p>{{ reply.text }}</p>
-            <form action="{% url 'scores:vote_scores' "comment" reply.id %}" data-get-url="{% url 'scores:get_scores' "comment" reply.id %}" method="post" class="vote-form">
-                {% csrf_token %}
-                <button
-                    type="submit"
-                    name="vote_type"
-                    value="up"
-                    class="vote-button">
-                    ▲
-                </button>
-                <span class="upvotes"></span>
-                <button
-                    type="submit"
-                    name="vote_type"
-                    value="down"
-                    class="vote-button">
-                    ▼
-                </button>
-                <span class="downvotes"></span>
-            </form>
+            <div class="vote-section">
+            {% include "posts/vote_form.html" with type='reply' %}
+            </div>
             <small>{{ reply.date }}</small>
             
         </li>

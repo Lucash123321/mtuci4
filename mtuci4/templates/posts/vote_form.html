@@ -1,0 +1,41 @@
+{% if type == 'post' %}
+<form action="{% url 'scores:vote_scores' 'post' post.id %}" 
+data-get-url="{% url 'scores:get_scores' 'post' post.id %}" 
+method="post" 
+class="vote-form vote-buttons">
+
+{% elif type == 'comment' %}
+
+<form action="{% url 'scores:vote_scores' 'comment' comment.id %}" 
+data-get-url="{% url 'scores:get_scores' 'comment' comment.id %}" 
+method="post" 
+class="vote-form">
+
+{% elif type == 'reply' %}
+
+<form action="{% url 'scores:vote_scores' "comment" reply.id %}" 
+data-get-url="{% url 'scores:get_scores' "comment" reply.id %}" 
+method="post" 
+class="vote-form">
+
+{% endif %}
+
+    {% csrf_token %}
+    <button
+        type="submit"
+        name="vote_type"
+        value="up"
+        class="vote-button">
+        ▲
+    </button>
+    <span class="upvotes"></span>
+    <button
+        type="submit"
+        name="vote_type"
+        value="down"
+        class="vote-button">
+        ▼
+    </button>
+    <span class="downvotes"></span>
+
+</form>

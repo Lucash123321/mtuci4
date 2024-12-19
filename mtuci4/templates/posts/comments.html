@@ -3,25 +3,9 @@
     {% for comment in comments %}
         <li class="comment">
             <p>{{ comment.text }}</p>
-            <form action="{% url 'scores:vote_scores' "comment" comment.id %}" data-get-url="{% url 'scores:get_scores' "comment" comment.id %}" method="post" class="vote-form">
-            {% csrf_token %}
-                <button
-                    type="submit"
-                    name="vote_type"
-                    value="up"
-                    class="vote-button">
-                    ▲
-                </button>
-                <span class="upvotes"></span>
-                <button
-                    type="submit"
-                    name="vote_type"
-                    value="down"
-                    class="vote-button">
-                    ▼
-                </button>
-                <span class="downvotes"></span>
-            </form>
+            <div class="vote-section">
+                {% include "posts/vote_form.html" with type='comment' %}
+            </div>
             <small>{{ comment.date }}</small>
             {% include "posts/replies.html" with replies=comment.replies.all %}
         </li>
