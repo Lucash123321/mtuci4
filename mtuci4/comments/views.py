@@ -18,9 +18,9 @@ def create_comment(request):
             comment = form.save(commit=False)
             comment.author = request.user
             if request.POST.type == 'post':
-                comment.post = request.POST.id
+                comment.post = request.POST.get("id")
             elif request.POST.type == 'parent':
-                comment.parent = request.POST.parent
+                comment.parent = request.POST.get("parent")
             else:
                 JsonResponse({"code": 400})
             comment.save()
@@ -32,13 +32,13 @@ def create_comment(request):
 
 @login_required
 def edit_comment(request, comment_id):
-    permission = Permission.objects.get(role=request.user.role, entity='post', permission='edit')
+    permission = Permission.objects.filter(role=request.user.role, entity='post', permission='edit')
     if request.method == 'POST':
         comment = get_object_or_404(Comment, id=comment_id)
-        if not permission or request.user != comment.user:
+        if not permission and request.user != comment.user:
             return JsonResponse({"code": 403})
-
-        comment.text = request.POST.text
+        
+        comment.text = request.POST.get("text")
         comment.save()
         return JsonResponse({"code": 200})
     return JsonResponse({"code": 405})
@@ -46,7 +46,7 @@ def edit_comment(request, comment_id):
 
 @login_required()
 def delete_comment(request, comment_id):
-    permission = Permission.objects.get(role=request.user.role, entity='post', permission='delete')
+    permission = Permission.objects.filter(role=request.user.role, entity='post', permission='delete')
     if request.method == "POST":
         comment = get_object_or_404(Comment, id=comment_id)
         Comment.objects.filter(parent=comment_id).delete()

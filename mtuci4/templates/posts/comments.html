@@ -6,7 +6,7 @@
         method="post" 
         class="create-comment-form">
         {% csrf_token %}
-        <textarea id="adaptive-textarea" name="comment" placeholder="Добавить комментарий..."></textarea>
+        <textarea class="adaptive-textarea" name="comment" placeholder="Добавить комментарий..."></textarea>
         <button type="sumbit">Отправить</button>
     </form>
 {% if comments %}
@@ -20,14 +20,29 @@
                 {% csrf_token %}
                 <button type="sumbit">Удалить</button>
             </form>
+            <button class="show-edit-elements">Редактировать</button>
             <div class="comment-header">
             <img />
             <small>{{ comment.user.username }}</small>
             </div>
-            <p>{{ comment.text }}</p>
-                
+            <form action="{% url 'comments:edit_comment' comment.id %}" 
+                method="post" 
+                class="edit-comment-form">
+            <p class="comment-text">{{ comment.text }}</p>
+                {% csrf_token %}
+            <textarea class="adaptive-textarea hidden" name="comment">{{ comment.text }}</textarea>
+            <button type="sumbit" class="submit-button hidden">Применить</button>
+            </form>
             {% include "posts/vote_form.html" with type='comment' %}
 
+            <form action="{% url 'comments:create_comment' %}" 
+                method="post" 
+                class="create-comment-form">
+                {% csrf_token %}
+                <textarea class="adaptive-textarea" name="comment" placeholder="Ответить"></textarea>
+                <button type="sumbit">Ответить</button>
+            </form>
+            
             <div class="comment-footer">
                 <small>{{ comment.date }}</small>
                 {% if comment.replies.all %}
@@ -41,6 +56,5 @@
     {% endfor %}
 </ul>
 {% endif %}
-<script src="{% static "js/textarea.js" %}"></script>
 <script src="{% static "js/show_replies.js" %}"></script>
 </div>

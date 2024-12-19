@@ -32,8 +32,8 @@ def edit_post(request, topic_slug, post_id):  # for moderators only | upd by mak
         if not permission and post.user != request.user:
             return JsonResponse({'code': 403})
 
-        post.title = request.POST.title
-        post.text = request.POST.text
+        post.title = request.POST.get("title")
+        post.text = request.POST.get("text")
         post.save()
         return JsonResponse({'code': 200})
     return JsonResponse({'code': 405})
