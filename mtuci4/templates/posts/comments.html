@@ -10,6 +10,7 @@
 {% if comments %}
 <ul class="comments">
     {% for comment in comments %}
+    <div>   
         <li class="comment">
             <div class="comment-header">
             <img />
@@ -20,16 +21,18 @@
             {% include "posts/vote_form.html" with type='comment' %}
 
             <div class="comment-footer">
-            <small>{{ comment.date }}</small>
-            {% if comment.replies.all %}
-            <button class="comment-show-replies"><small>Показать ответы...</small></button>
-            {% endif %}
+                <small>{{ comment.date }}</small>
+                {% if comment.replies.all %}
+                <button class="comment-show-replies"><small>Показать ответы...</small></button>
+                {% endif %}
             </div>
         </li>
         
         {% include "posts/replies.html" with replies=comment.replies.all %}
+    </div> 
     {% endfor %}
 </ul>
 {% endif %}
 <script src="{% static "js/textarea.js" %}"></script>
+<script src="{% static "js/show_replies.js" %}"></script>
 </div>
