@@ -31,22 +31,28 @@ def create_comment(request):
 
 @login_required
 def edit_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
-    if request.user != Comment.user:
-        return JsonResponse({"code": 403})
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, id=comment_id)
+        if request.user != comment.user:
+            return JsonResponse({"code": 403})
 
-    comment.text = request.POST.text
-    comment.save()
-    return JsonResponse({"code": 200})
+        comment.text = request.POST.text
+        comment.save()
+        return JsonResponse({"code": 200})
+    return JsonResponse({"code": 405})
+
 
 @login_required()
 def delete_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
-    if request.user != Comment.user:
-        return JsonResponse({"code": 403})
+    if request.method == "POST":
+        comment = get_object_or_404(Comment, id=comment_id)
+        if request.user != comment.user:
+            return JsonResponse({"code": 403})
 
-    comment.delete()
-    return JsonResponse({"code": 200})
+        comment.delete()
+        return JsonResponse({"code": 200})
+    return JsonResponse({"code": 405})
+
 
 @login_required
 def vote_comment(request, comment_id, vote_type):
