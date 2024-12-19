@@ -1,18 +1,15 @@
-.vote-section {
-    display: block;
-    flex-direction: column;
+.vote-form {
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-    padding-top: 5px;
+    padding: 5px 0;
     border-radius: 50px;
     border: 2px solid aliceblue;
     background-color: rgba(0, 0, 0, 0.3);
     max-width: 150px;
-    /* max-height: 20px; */
 }
 
-.vote-section .upvotes, .vote-section .downvotes {
+.vote-form .upvotes, .vote-form .downvotes {
     font-size: 13px;
     font-weight: bold;
     word-wrap: break-word;

@@ -3,9 +3,9 @@
     {% for comment in comments %}
         <li class="comment">
             <p>{{ comment.text }}</p>
-            <div class="vote-section">
-                {% include "posts/vote_form.html" with type='comment' %}
-            </div>
+                
+            {% include "posts/vote_form.html" with type='comment' %}
+
             <small>{{ comment.date }}</small>
             {% include "posts/replies.html" with replies=comment.replies.all %}
         </li>

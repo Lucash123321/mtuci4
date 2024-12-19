@@ -8,9 +8,8 @@
         <p>{{ post.text }}</p>
     </div>
 
-    <div class="vote-section">
-        {% include "posts/vote_form.html" with type='post' %}
-    </div>
+    {% include "posts/vote_form.html" with type='post' %}
+
 
     <div class="comment-section">
         <h2>Комментарии</h2>

@@ -9,14 +9,14 @@ class="vote-form vote-buttons">
 <form action="{% url 'scores:vote_scores' 'comment' comment.id %}" 
 data-get-url="{% url 'scores:get_scores' 'comment' comment.id %}" 
 method="post" 
-class="vote-form">
+class="vote-form vote-buttons">
 
 {% elif type == 'reply' %}
 
 <form action="{% url 'scores:vote_scores' "comment" reply.id %}" 
 data-get-url="{% url 'scores:get_scores' "comment" reply.id %}" 
 method="post" 
-class="vote-form">
+class="vote-form vote-buttons">
 
 {% endif %}
 
