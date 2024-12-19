@@ -1,3 +1,13 @@
+.clickable-post {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.clickable-post:hover {
+    opacity: 95%;
+}
+
 .post-container {
     max-width: 1000px;
     margin: 20px auto;
@@ -6,7 +16,7 @@
     border-radius: 8px;
     border: 8px solid rgb(243, 152, 0);
     box-shadow: 10px 6px 6px rgba(0, 0, 0, 0.4);
-    /* color: white; */
+    /* color: rgb(255, 255, 255); */
 }
 
 .post-header {
@@ -23,6 +33,7 @@
     font-size: 32px;
     margin: 10px 0 5px;
     padding-bottom: 20px;
+    color: rgb(243, 152, 0);
 }
 
 .post-meta {

@@ -1,18 +1,23 @@
-<article class="post-container">
-    <div class="post-header">
-        <h2 class="post-header"><a href="{% url 'topics:posts:post_detail' post.topic.slug post.topic_post_id %}">{{ post.title }}</a></h2>
-        <p class="post-meta">Автор: {{ post.user }} | {{ post.date }}</p>
-    </div>
-
-    <div class="post-text">
-        <p>{{ post.text }}</p>
-    </div>
-
-    {% include "posts/vote_form.html" with type='post' %}
-
-    {% if not topic %}
-    {% include "posts/comments.html" with comments=post.comments.all %}
-    {% endif %}
-
+{% if topic %}
+<a href="{% url 'topics:posts:post_detail' post.topic.slug post.topic_post_id %}" class="clickable-post">
+{% endif %}
+    <article class="post-container">
+        <div class="post-header">
+            <h2 class="post-header">{{ post.title }}</h2>
+            <p class="post-meta">Автор: {{ post.user }} | {{ post.date }}</p>
+        </div>
     
-</article>
+        <div class="post-text">
+            <p>{{ post.text }}</p>
+        </div>
+    
+        {% include "posts/vote_form.html" with type='post' %}
+        {% if topic %}
+            <p>Показать комментарии</p>
+        {% elif not topic %}
+        {% include "posts/comments.html" with comments=post.comments.all %}
+        {% endif %}
+    </article>
+{% if topic %}
+</a>
+{% endif %}
