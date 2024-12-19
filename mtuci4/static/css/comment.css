@@ -1,8 +1,56 @@
+.hidden {
+    display: none;
+}
+
 .comment-section {
     margin-top: 40px;
+}
+
+.comment-section li {
+    list-style: none;
 }
 
 .comment-section h2 {
     font-size: 18px;
     margin-bottom: 20px;
+}
+
+.comment-section textarea {
+    width: 100%;
+    max-width: 100%; /* Ограничение по ширине */
+    min-height: 40px; /* Минимальная высота */
+    overflow: hidden; /* Скрытие полос прокрутки */
+    resize: none; /* Отключение ручного изменения размера */
+    font-family: Arial, sans-serif; /* Пример шрифта */
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box; /* Учитывает padding и border */
+}
+
+.comments {
+    padding-left: 30px;
+}
+
+.comment {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #fff;
+}
+
+.comment-footer {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.comment-show-replies {
+    color: gray;
+    text-decoration: underline;
+    border: none;
+    background-color: rgb(33, 12, 0);
+    cursor: pointer;
+}
+
+.comment-show-replies > small {
+    font-size: 18px;
 }

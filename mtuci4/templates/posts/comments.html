@@ -1,30 +1,46 @@
+{% load static %}
+<div class="comment-section">
+    
+
+    <form action="{% url 'comments:create_comment' %}" 
+        method="post" 
+        class="create-comment-form">
+        {% csrf_token %}
+        <textarea id="adaptive-textarea" name="comment" placeholder="Добавить комментарий..."></textarea>
+        <button type="sumbit">Отправить</button>
+    </form>
 {% if comments %}
 <ul class="comments">
     {% for comment in comments %}
+    <div>   
         <li class="comment">
-            <p>{{ comment.text }}</p>
-            <form action="{% url 'scores:vote_scores' "comment" comment.id %}" data-get-url="{% url 'scores:get_scores' "comment" comment.id %}" method="post" class="vote-form">
-            {% csrf_token %}
-                <button
-                    type="submit"
-                    name="vote_type"
-                    value="up"
-                    class="vote-button">
-                    ▲
-                </button>
-                <span class="upvotes"></span>
-                <button
-                    type="submit"
-                    name="vote_type"
-                    value="down"
-                    class="vote-button">
-                    ▼
-                </button>
-                <span class="downvotes"></span>
+            <form action="{% url 'comments:delete_comment' comment.id %}" 
+                method="post" 
+                class="delete-comment-form">
+                {% csrf_token %}
+                <button type="sumbit">Удалить</button>
             </form>
-            <small>{{ comment.date }}</small>
-            {% include "posts/replies.html" with replies=comment.replies.all %}
+            <div class="comment-header">
+            <img />
+            <small>{{ comment.user.username }}</small>
+            </div>
+            <p>{{ comment.text }}</p>
+                
+            {% include "posts/vote_form.html" with type='comment' %}
+
+            <div class="comment-footer">
+                <small>{{ comment.date }}</small>
+                {% if comment.replies.all %}
+                <button class="comment-show-replies"><small>Показать ответы...</small></button>
+                {% endif %}
+            </div>
         </li>
+        
+        {% include "posts/replies.html" with replies=comment.replies.all %}
+    </div> 
     {% endfor %}
 </ul>
 {% endif %}
+<script src="{% static "js/textarea.js" %}"></script>
+<script src="{% static "js/show_replies.js" %}"></script>
+</div>

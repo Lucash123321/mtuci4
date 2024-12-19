@@ -59,7 +59,7 @@ def post_detail(request, topic_slug, id):
     upvotes = post.votes.filter(vote_type='up').count()
     downvotes = post.votes.filter(vote_type='down').count()
     return render(request, 'posts/post_detail.html', {
-        'topic': topic,
+        # 'topic': topic,
         'post': post,
         'upvotes': upvotes,
         'downvotes': downvotes
