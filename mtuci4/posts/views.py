@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from posts.forms import CommentForm, PostForm
+from posts.forms import PostForm
 from posts.models import Post
 from django.http import JsonResponse
 from topics.models import Topic
@@ -23,28 +23,32 @@ def create_post(request):
 
 @login_required
 def edit_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
-    topic = Topic.objects.get(slug=topic_slug)
-    post = Post.objects.get(topic=topic, topic_post_id=post_id)
+    if request.method == "POST":
+        topic = Topic.objects.get(slug=topic_slug)
+        post = Post.objects.get(topic=topic, topic_post_id=post_id)
 
-    if not post.user == request.user:
-        return JsonResponse({'code': 403})
+        if not post.user == request.user:
+            return JsonResponse({'code': 403})
 
-    post.title = request.POST.title
-    post.text = request.POST.text
-    post.save()
-    return JsonResponse({'code': 200})
+        post.title = request.POST.title
+        post.text = request.POST.text
+        post.save()
+        return JsonResponse({'code': 200})
+    return JsonResponse({'code': 405})
 
 
 @login_required
 def delete_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
-    topic = Topic.objects.get(slug=topic_slug)
-    post = Post.objects.get(topic=topic, topic_post_id=post_id)
+    if request.method == "POST":
+        topic = Topic.objects.get(slug=topic_slug)
+        post = Post.objects.get(topic=topic, topic_post_id=post_id)
 
-    if post.user == request.user:
-        return JsonResponse({'code': 403})
+        if post.user == request.user:
+            return JsonResponse({'code': 403})
 
-    post.delete()
-    return JsonResponse({'code': 200})
+        post.delete()
+        return JsonResponse({'code': 200})
+    return JsonResponse({'code': 405})
 
 
 def post_detail(request, topic_slug, id):

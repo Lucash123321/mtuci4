@@ -1,54 +1,61 @@
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.http import JsonResponse, HttpResponseRedirect
 from comments.models import Comment
 from scores.models import Score
+from topics.models import Topic
+from posts.models import Post
+from comments.forms import CommentForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def create_comment(request):
-    pass
-
-# TODO: Протестить с формами, Адаптировать к текущим реалиям
-# @login_required
-# def create_comment(request, topic_slug, id):
-#     topic = Topic.objects.get(slug=topic_slug)
-#     parent = Post.objects.get(topic_post_id=id, topic=topic)
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             comment = form.save(commit=False)
-#             comment.author = request.user
-#             comment.parent = parent
-#             comment.topic = parent.topic
-#             comment.save()
-#             return redirect('post_detail', topic_id=parent.id)
-#     else:
-#         form = CommentForm()
-#     return render(request, 'posts/create_comment.html', {'form': form})
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            if request.POST.type == 'post':
+                comment.post = request.POST.id
+            elif request.POST.type == 'parent':
+                comment.parent = request.POST.parent
+            else:
+                JsonResponse({"code": 400})
+            comment.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        form = CommentForm()
+    return render(request, 'posts/create_comment.html', {'form': form})
 
 
 @login_required
 def edit_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
-    if request.user != Comment.user:
-        return JsonResponse({"code": 403})
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, id=comment_id)
+        if request.user != comment.user:
+            return JsonResponse({"code": 403})
 
-    comment.text = request.POST.text
-    comment.save()
-    return JsonResponse({"code": 200})
+        comment.text = request.POST.text
+        comment.save()
+        return JsonResponse({"code": 200})
+    return JsonResponse({"code": 405})
+
 
 @login_required()
 def delete_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
-    if request.user != Comment.user:
-        return JsonResponse({"code": 403})
+    if request.method == "POST":
+        comment = get_object_or_404(Comment, id=comment_id)
+        if request.user != comment.user:
+            return JsonResponse({"code": 403})
 
-    comment.delete()
-    return JsonResponse({"code": 200})
+        comment.delete()
+        return JsonResponse({"code": 200})
+    return JsonResponse({"code": 405})
+
 
 @login_required
-def vote_comment(request, id, vote_type):
+def vote_comment(request, comment_id, vote_type):
 
     if request.method != "POST":
         return JsonResponse({"code": 405})
