@@ -1,61 +1,12 @@
 {% load static %}
-{% include "posts/base.html" %}
+{% comment %} {% include "posts/base.html" %} {% endcomment %}
 {% if posts %}
-    <ul class="posts">
+    <section class="posts">
         {% for post in posts %}
-            {% if not post.is_comment %}
-            <li class="post">
-                <a href="{% url 'topics:posts:post_detail' topic.slug post.topic_post_id %}">{{ post.title }}</a>
-                <p>{{ post.text }}</p>
-                    <form action="{% url 'scores:vote_scores' 'post' post.id %}" 
-                        data-get-url="{% url 'scores:get_scores' 'post' post.id %}" 
-                        method="post" 
-                        class="vote-form vote-buttons">
-                        {% csrf_token %}
-                        <button
-                            type="submit"
-                            name="vote_type"
-                            value="up"
-                            class="vote-button">
-                            ▲
-                        </button>
-                        <span class="upvotes"></span>
-                        <button
-                            type="submit"
-                            name="vote_type"
-                            value="down"
-                            class="vote-button">
-                            ▼
-                        </button>
-                        <span class="downvotes"></span>
-                    </form>
-                    {% comment %} <form action="{% url 'scores:vote_scores' "post" post.id %}" data-get-url="{% url 'scores:get_scores' "post" post.id %}" method="post" class="vote-form">
-                        {% csrf_token %}
-                        <input
-                            type="submit"
-                            name="vote_type"
-                            class="vote-button"
-                            value="up" />
-                        <span class="upvotes"></span>
-                        <input
-                            type="submit"
-                            name="vote_type"
-                            class="vote-button"
-                            value="down" />
-                        <span class="downvotes"></span>
-                    </form> {% endcomment %}
-                <p>{{ post.description }}</p>
-                <small>{{ post.date }}</small>
-
-                {% include "posts/comments.html" with comments=post.comments.all %}
-                
-            </li>
-            {% endif %}
+        {% include "posts/one_post.html" %}
         {% endfor %}
-    </ul>
-
+    </section>
     <script src="{% static "js/vote.js" %}"></script>
-    
 {% else %}
     <p>Нет постов в данном топике.</p>
 {% endif %}

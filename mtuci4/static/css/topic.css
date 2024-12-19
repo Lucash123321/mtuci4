@@ -3,10 +3,11 @@ html {
 }
 
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif';
     margin: 0;
     padding: 0;
-    background-color: #e3e3e3;
+    background-color: whitesmoke;
+    color: rgb(255, 255, 255);
 }
 
 a {

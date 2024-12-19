@@ -1,7 +1,20 @@
 {% load static %}
-<header class="header">
-    <ul>
-        <li><img src="{% static 'images/logo_mtuci4.png' %}" alt=""></li>
-        <li><div class="header__item header__sub">Добро пожаловать. Снова.</div></li>
-    </ul>
+<header>
+    <div class="logo">
+        <a href="/">
+            <img class="introduction-logo" src="{% static 'images/logo_mtuci4.png' %}" alt="">
+        </a>
+    </div>
+
+    <nav class="main-nav">
+        <ul class="nav-links">
+            <li><a href="/">Главная</a></li>
+            <li><a href="...">Что-то еще</a></li>
+        </ul>
+    </nav>
+
+    <div class="user-actions">
+        <a href="/login" class="button">Войти</a>
+        <a href="/register" class="button">Регистрация</a>
+    </div>
 </header>
