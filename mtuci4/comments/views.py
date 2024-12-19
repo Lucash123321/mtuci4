@@ -9,10 +9,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def create_comment(request):
-    pass
-
-
 @login_required
 def create_comment(request):
     if request.method == 'POST':
