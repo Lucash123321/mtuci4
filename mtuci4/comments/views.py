@@ -49,6 +49,7 @@ def delete_comment(request, comment_id):
     permission = Permission.objects.get(role=request.user.role, entity='post', permission='delete')
     if request.method == "POST":
         comment = get_object_or_404(Comment, id=comment_id)
+        Comment.objects.filter(parent=comment_id).delete()
         if not permission and request.user != comment.user:
             return JsonResponse({"code": 403})
 
