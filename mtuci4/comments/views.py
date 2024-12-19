@@ -33,6 +33,9 @@ def delete_comment(request):
     pass
 
 def vote_comment(request, id, vote_type):
+    if not request.user.is_authenticated:
+        return JsonResponse({"code": 403})
+
     if request.method != "POST":
         return JsonResponse({"code": 405})
     
