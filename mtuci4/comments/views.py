@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse, HttpResponseRedirect
 from comments.models import Comment
+from roles.models import Permission
 from scores.models import Score
 from topics.models import Topic
 from posts.models import Post
@@ -31,9 +32,10 @@ def create_comment(request):
 
 @login_required
 def edit_comment(request, comment_id):
+    permission = Permission.objects.get(role=request.user.role, entity='comment', permission='edit')
     if request.method == 'POST':
         comment = get_object_or_404(Comment, id=comment_id)
-        if request.user != comment.user:
+        if not permission or request.user != comment.user:
             return JsonResponse({"code": 403})
 
         comment.text = request.POST.text
@@ -44,9 +46,10 @@ def edit_comment(request, comment_id):
 
 @login_required()
 def delete_comment(request, comment_id):
+    permission = Permission.objects.get(role=request.user.role, entity='comment', permission='delete')
     if request.method == "POST":
         comment = get_object_or_404(Comment, id=comment_id)
-        if request.user != comment.user:
+        if not permission and request.user != comment.user:
             return JsonResponse({"code": 403})
 
         comment.delete()

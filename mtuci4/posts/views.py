@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from posts.forms import PostForm
 from posts.models import Post
+from roles.models import Permission
 from django.http import JsonResponse
 from topics.models import Topic
 
@@ -23,11 +24,12 @@ def create_post(request):
 
 @login_required
 def edit_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
+    permission = Permission.objects.get(role=request.user.role, entity='post', permission='edit')
     if request.method == "POST":
         topic = Topic.objects.get(slug=topic_slug)
         post = Post.objects.get(topic=topic, topic_post_id=post_id)
 
-        if not post.user == request.user:
+        if not permission and post.user != request.user:
             return JsonResponse({'code': 403})
 
         post.title = request.POST.title
@@ -39,11 +41,12 @@ def edit_post(request, topic_slug, post_id):  # for moderators only | upd by mak
 
 @login_required
 def delete_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
+    permission = Permission.objects.get(role=request.user.role, entity='post', permission='delete')
     if request.method == "POST":
         topic = Topic.objects.get(slug=topic_slug)
         post = Post.objects.get(topic=topic, topic_post_id=post_id)
 
-        if post.user == request.user:
+        if not permission and post.user != request.user:
             return JsonResponse({'code': 403})
 
         post.delete()
