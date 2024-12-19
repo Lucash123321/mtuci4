@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const csrfToken = form.querySelector("[name=csrfmiddlewaretoken]").value;
             const itemToDelete = form.parentElement.parentElement;
 
+            
             itemToDelete.remove();
 
             fetch(url, {
@@ -19,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
                 })
                 .catch((error) => console.error(error));
         });

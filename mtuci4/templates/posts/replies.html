@@ -1,6 +1,7 @@
 {% if replies %}
 <ul class="comments replies hidden">
     {% for reply in replies %}
+    <div> 
         <li class="comment">
             <form action="{% url 'comments:delete_comment' reply.id %}" 
                 method="post" 
@@ -19,6 +20,7 @@
             <small>{{ reply.date }}</small>
             
         </li>
+    </div> 
     {% endfor %}
 </ul>
 {% endif %}

@@ -35,7 +35,7 @@ def edit_comment(request, comment_id):
         comment = get_object_or_404(Comment, id=comment_id)
         if request.user != comment.user:
             return JsonResponse({"code": 403})
-
+        
         comment.text = request.POST.text
         comment.save()
         return JsonResponse({"code": 200})

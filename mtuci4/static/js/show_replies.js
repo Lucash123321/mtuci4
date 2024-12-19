@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = showButton.parentElement.parentElement.parentElement;
         const replies = container.querySelector(".replies");
 
-        console.log(replies);
         replies.classList.toggle("hidden");
     }
 
