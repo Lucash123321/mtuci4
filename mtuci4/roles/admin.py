@@ -6,7 +6,7 @@ from roles.models import Permission, Role
 
 @admin.register(Permission)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('role', 'permission')
+    list_display = ('role', 'entity', 'permission')
     search_fields = ('role', )
 
 
