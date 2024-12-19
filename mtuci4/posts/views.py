@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from posts.forms import CommentForm, PostForm
+from posts.forms import PostForm
+from comments.forms import CommentForm
 from posts.models import Post
 from django.http import JsonResponse
 from topics.models import Topic
