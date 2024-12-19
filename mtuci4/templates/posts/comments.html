@@ -20,6 +20,12 @@
                 {% csrf_token %}
                 <button type="sumbit">Удалить</button>
             </form>
+            <form action="{% url 'comments:edit_comment' comment.id %}" 
+                method="post" 
+                class="edit-comment-form">
+                {% csrf_token %}
+                <button type="sumbit">Редактировать</button>
+            </form>
             <div class="comment-header">
             <img />
             <small>{{ comment.user.username }}</small>
