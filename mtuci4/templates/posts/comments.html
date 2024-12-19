@@ -1,8 +1,10 @@
 {% load static %}
 <div class="comment-section">
     
-    <!-- TODO: обработка формы -->
-    <form method="post">
+
+    <form action="{% url 'comments:create_comment' %}" 
+        method="post" 
+        class="create-comment-form">
         {% csrf_token %}
         <textarea id="adaptive-textarea" name="comment" placeholder="Добавить комментарий..."></textarea>
         <button type="sumbit">Отправить</button>
@@ -12,6 +14,12 @@
     {% for comment in comments %}
     <div>   
         <li class="comment">
+            <form action="{% url 'comments:delete_comment' comment.id %}" 
+                method="post" 
+                class="delete-comment-form">
+                {% csrf_token %}
+                <button type="sumbit">Удалить</button>
+            </form>
             <div class="comment-header">
             <img />
             <small>{{ comment.user.username }}</small>

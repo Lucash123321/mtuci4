@@ -2,6 +2,12 @@
 <ul class="comments replies hidden">
     {% for reply in replies %}
         <li class="comment">
+            <form action="{% url 'comments:delete_comment' reply.id %}" 
+                method="post" 
+                class="delete-comment-form">
+                {% csrf_token %}
+                <button type="sumbit">Удалить</button>
+            </form>
             <div class="comment-header">
             <img />
             <small>{{ comment.user.username }}</small>
