@@ -24,7 +24,7 @@ def create_post(request):
 
 @login_required
 def edit_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
-    permission = Permission.objects.get(role=request.user.role, entity='post', permission='edit')
+    permission = Permission.objects.filter(role=request.user.role, entity='post', permission='edit')
     if request.method == "POST":
         topic = Topic.objects.get(slug=topic_slug)
         post = Post.objects.get(topic=topic, topic_post_id=post_id)
@@ -41,7 +41,7 @@ def edit_post(request, topic_slug, post_id):  # for moderators only | upd by mak
 
 @login_required
 def delete_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
-    permission = Permission.objects.get(role=request.user.role, entity='post', permission='delete')
+    permission = Permission.objects.filter(role=request.user.role, entity='post', permission='delete')
     if request.method == "POST":
         topic = Topic.objects.get(slug=topic_slug)
         post = Post.objects.get(topic=topic, topic_post_id=post_id)
