@@ -16,7 +16,6 @@ def get_scores(request, parent_type, id):
         
         user_vote = user_vote.vote_type if user_vote else user_vote
         
-        print(user_vote)
         
         upvotes = object.votes.filter(vote_type='up').count()
         downvotes = object.votes.filter(vote_type='down').count()

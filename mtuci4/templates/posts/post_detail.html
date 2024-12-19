@@ -5,14 +5,15 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
         {% include "posts/posts_styles.html" %}
-        <title>{{ topic.slug }}: {{ post.title }}</title>
+        <title>{{ post.title }}</title>
     </head>
     <body>
         {% include "includes/header.html" %}
         <main>
+        <a id="back_button" href="javascript:history.back()">GO BACK</a>
         {% include "posts/one_post.html" %}
         </main>
     </body>
-
+    <script src="{% static "js/delete_comment.js" %}"></script>
     <script src="{% static "js/vote.js" %}"></script>
 </html>
