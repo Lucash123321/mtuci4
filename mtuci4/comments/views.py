@@ -32,7 +32,7 @@ def create_comment(request):
 
 @login_required
 def edit_comment(request, comment_id):
-    permission = Permission.objects.get(role=request.user.role, entity='comment', permission='edit')
+    permission = Permission.objects.get(role=request.user.role, entity='post', permission='edit')
     if request.method == 'POST':
         comment = get_object_or_404(Comment, id=comment_id)
         if not permission or request.user != comment.user:
@@ -46,7 +46,7 @@ def edit_comment(request, comment_id):
 
 @login_required()
 def delete_comment(request, comment_id):
-    permission = Permission.objects.get(role=request.user.role, entity='comment', permission='delete')
+    permission = Permission.objects.get(role=request.user.role, entity='post', permission='delete')
     if request.method == "POST":
         comment = get_object_or_404(Comment, id=comment_id)
         if not permission and request.user != comment.user:
