@@ -14,6 +14,44 @@ a {
     color: rgb(243, 152, 0);
 }
 
+.create-post-form {
+    display: block;
+    border: 4px solid rgb(243, 152, 0);
+    border-radius: 8px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: rgb(33, 12, 0);
+    box-shadow: 10px 6px 6px rgba(0, 0, 0, 0.4);
+}
+
+.create-post-form label {
+    color: white;
+}
+
+.create-post-form button {
+    padding: 10px;
+    font-size: 18px;
+    color: rgb(243, 152, 0);
+    background-color: rgb(21, 8, 0);
+    border: 4px solid rgb(243, 152, 0);
+}
+
+.create-post-form input, .create-post-form textarea {
+    width: 100%;
+    max-width: 100%; /* Ограничение по ширине */
+    min-height: 40px; /* Минимальная высота */
+    overflow: hidden; /* Скрытие полос прокрутки */
+    resize: none; /* Отключение ручного изменения размера */
+    font-family: Arial, sans-serif; /* Пример шрифта */
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box; /* Учитывает padding и border */
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+    color: white;
+}
+
 .content {
     display: block;
     background-color: white;
@@ -68,11 +106,6 @@ article .footer-section .comment-svg {
     width: 25px;
     margin-right: 10px;
     filter: invert(0.8)
-}
-
-
-.content label {
-    color: black;
 }
 
 
