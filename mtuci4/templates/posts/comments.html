@@ -18,7 +18,7 @@
     <div>   
         <li class="comment">
             
-            <!-- КРУТАЯ КНОПКА -->
+            <!-- УДАЛЕНИЕ КОММЕНТАРИЯ -->
             <form action="{% url 'comments:delete_comment' comment.id %}" 
                 method="post" 
                 class="delete-comment-form">
@@ -26,11 +26,13 @@
                 {% csrf_token %}
                 <button type="sumbit">Удалить</button>
             </form>
+
+            <!-- ОТКРЫТЬ РЕДАКТИРОВАНИЕ -->
+
             <button class="show-edit-elements">Редактировать</button>
-            <div class="comment-header">
-
+            
             <!-- ПОЛЬЗОВАТЕЛЬСКИЕ ДАННЫЕ -->
-
+            <div class="comment-header">
             <img />
             <small>{{ comment.user.username }}</small>
             </div>

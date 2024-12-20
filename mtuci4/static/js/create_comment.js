@@ -13,21 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", (event) => {
             event.preventDefault();
 
-            // console.log(form);
-            // console.log(textarea);
-            // console.log(type);
-
             const text = textarea.value;
             const formData = new FormData();
 
             formData.append('type', type);
             formData.append('id', parent_id);
             formData.append('text', text);
-            
 
-            console.log(formData.get("text"));
-            console.log(formData.get("id"));
-            console.log(formData.get("type"));
+            console.log(type);
+            console.log(parent_id);
+            console.log(text);
 
             fetch(url, {
                 method: "POST",

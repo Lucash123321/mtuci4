@@ -15,10 +15,10 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        ordering = ('-id',)
+        ordering = ('id',)
     
     def __str__(self):
-        return f"Comment by {self.user} on {self.post}" if not self.parent else f"Reply by {self.user}"
+        return f"Comment by {self.user} on {self.post.id} post" if not self.parent else f"Reply by {self.user} on {self.parent.id} comment"
 
     @property
     def is_reply(self):

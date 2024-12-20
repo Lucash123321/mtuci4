@@ -14,7 +14,12 @@
     </nav>
 
     <div class="user-actions">
-        <a href="/login" class="button">Войти</a>
-        <a href="/register" class="button">Регистрация</a>
+        {% if not user.is_anonymous %}
+        <a href="{% url "users:profile" %}" class="button">Профиль</a>
+        <a href="{% url "users:logout" %}" class="button">Выход</a>
+        {% else  %}
+        <a href="{% url "users:login" %}" class="button">Войти</a>
+        <a href="{% url "users:sign_up" %}" class="button">Регистрация</a>
+        {% endif %}
     </div>
 </header>

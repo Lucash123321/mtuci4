@@ -23,6 +23,7 @@ def create_comment(request):
             comment.post = Post.objects.get(id=request.POST.get("id"))
         elif request.POST.get("type") == 'comment':
             comment.parent = Comment.objects.get(id=request.POST.get("id"))
+            print(text)
         else:
             JsonResponse({"code": 400})
         
