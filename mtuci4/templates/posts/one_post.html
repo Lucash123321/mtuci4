@@ -35,7 +35,7 @@
             {% csrf_token %}
         <input type="text" class="adaptive-title-input hidden" name="title" value="{{ post.title }}">
         <textarea class="adaptive-textarea hidden" name="text">{{ post.text }}</textarea>
-        <button type="submit" class="submit-button hidden">Применить</button>
+        <button type="submit" class="button submit-button hidden">Применить</button>
         </form>
 
         {% if user.is_authenticated %}
