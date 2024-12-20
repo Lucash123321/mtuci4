@@ -12,9 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
         adjustHeight(textarea);
 
       });
-      textarea.classList.remove("hidden");
-      adjustHeight(textarea);
-      textarea.classList.add("hidden");
+      if (textarea.parentElement.parentElement.tagName == "ARTICLE") {
+        
+        textarea.classList.remove("hidden");
+        adjustHeight(textarea);
+        textarea.classList.add("hidden");
+      }
     });
   
 });

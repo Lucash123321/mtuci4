@@ -14,7 +14,7 @@
 
             <div class="comment-header">
             <img />
-            <small>{{ comment.user.username }}</small>
+            <small>{{ reply.user.username }}</small>
             </div>
 
             <form action="{% url 'comments:edit_comment' comment.id %}" 

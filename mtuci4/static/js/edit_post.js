@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const show_buttons = document.querySelectorAll(".show-edit-elements");
+    const show_buttons = document.querySelectorAll(".show-edit-posts");
     const edit_forms = document.querySelectorAll(".edit-post-form");
 
     // console.log(show_buttons);
@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const textarea_to_show = button.parentElement.parentElement.querySelector(".adaptive-textarea");
         const button_to_show = button.parentElement.parentElement.querySelector(".submit-button");
 
-        console.log(title_to_hide);
-        console.log(text_to_hide);
-        console.log(input_to_show);
-        console.log(textarea_to_show);
-        console.log(button_to_show);
+        // console.log(title_to_hide);
+        // console.log(text_to_hide);
+        // console.log(input_to_show);
+        // console.log(textarea_to_show);
+        // console.log(button_to_show);
 
         button.addEventListener("click", (event) => {
             event.preventDefault();
@@ -41,10 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-            console.log(title_to_change);
-            console.log(text_to_change);
-            console.log(textarea);
-            console.log(button_to_hide);
+            // console.log(title_to_change);
+            // console.log(text_to_change);
+            
+            // console.log(input.value);
+            // console.log(textarea.value);
+
             title_to_change.textContent = input.value;
             text_to_change.textContent = textarea.value;
             title_to_change.classList.toggle("hidden");
