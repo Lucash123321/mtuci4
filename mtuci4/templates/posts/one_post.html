@@ -1,3 +1,4 @@
+{% load static %}
 {% if topic and user.is_authenticated %}
 <a href="{% url 'topics:posts:post_detail' post.topic.slug post.topic_post_id %}" class="clickable-post">
     {% endif %}
@@ -43,7 +44,10 @@
                     <div>
                 {% include "posts/vote_form.html" with type='post' %}
                     </div>
-                <p>Показать комментарии</p>          
+                <div class="comment-button">
+                    <img class="comment-svg" src="{% static 'images/comment.svg' %}" />
+                    <span class="comments-count">{{post.comments.all.count}}</span>
+                </div>
                 </div>
             {% elif not topic %}
                 {% include "posts/vote_form.html" with type='post' %}

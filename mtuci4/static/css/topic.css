@@ -45,6 +45,32 @@ a {
     padding: 10px;
 }
 
+article .footer-section {
+    display: flex;
+}
+
+.comment-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    border-radius: 50px;
+    border: 2px solid aliceblue;
+    background-color: #0000004d;
+    width: 80px;
+    margin-left: 15px;
+}
+.comment-button:hover {
+    opacity: 0.9;
+}
+
+article .footer-section .comment-svg {
+    width: 25px;
+    margin-right: 10px;
+    filter: invert(0.8)
+}
+
+
 .content label {
     color: black;
 }
