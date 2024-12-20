@@ -20,10 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.append('id', parent_id);
             formData.append('text', text);
 
-            console.log(type);
-            console.log(parent_id);
-            console.log(text);
-
             fetch(url, {
                 method: "POST",
                 headers: {

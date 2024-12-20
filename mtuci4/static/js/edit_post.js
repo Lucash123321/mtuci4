@@ -1,35 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const show_buttons = document.querySelectorAll(".show-edit-elements");
+    const show_buttons = document.querySelectorAll(".show-edit-posts");
     const edit_forms = document.querySelectorAll(".edit-post-form");
 
     // console.log(show_buttons);
 
     show_buttons.forEach(function (button) {
+        const title_to_hide = button.parentElement.parentElement.querySelector(".post-header h2");
+        const text_to_hide = button.parentElement.parentElement.querySelector(".post-text p");
+        const input_to_show = button.parentElement.parentElement.querySelector(".adaptive-title-input");
+        const textarea_to_show = button.parentElement.parentElement.querySelector(".adaptive-textarea");
+        const button_to_show = button.parentElement.parentElement.querySelector(".submit-button");
+
+        // console.log(title_to_hide);
+        // console.log(text_to_hide);
+        // console.log(input_to_show);
+        // console.log(textarea_to_show);
+        // console.log(button_to_show);
+
         button.addEventListener("click", (event) => {
             event.preventDefault();
-            if (button.parentElement.parentElement.getAttribute('href') !== '#')
-            {
-                button.parentElement.parentElement.setAttribute(
-                    'buffer', 
-                    button.parentElement.parentElement.getAttribute('href')
-                )
-                button.parentElement.parentElement.setAttribute('href', '#');
-            } else {
-                form.parentElement.parentElement.setAttribute(
-                    'href',
-                    form.parentElement.parentElement.getAttribute('buffer')
-                )
-                form.parentElement.removeAttribute('buffer');
-            }
-
-        })
-        const title_to_hide = button.parentElement.querySelector(".post-header h2");
-        const text_to_hide = button.parentElement.querySelector(".post-text p");
-        const input_to_show = button.parentElement.querySelector(".adaptive-title-input");
-        const textarea_to_show = button.parentElement.querySelector(".adaptive-textarea");
-        const button_to_show = button.parentElement.querySelector(".submit-button");
-
-        button.addEventListener("click", (event) => {
             title_to_hide.classList.toggle("hidden");
             text_to_hide.classList.toggle("hidden");
             input_to_show.classList.toggle("hidden");
@@ -52,17 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-            if (form.parentElement.parentElement.getAttribute('href') === '#') {
-                form.parentElement.parentElement.setAttribute(
-                    'href',
-                    form.parentElement.parentElement.getAttribute('buffer')
-                )
-                form.parentElement.removeAttribute('buffer');
-            }
-            console.log(title_to_change);
-            console.log(text_to_change);
-            console.log(textarea);
-            console.log(button_to_hide);
+            // console.log(title_to_change);
+            // console.log(text_to_change);
+            
+            // console.log(input.value);
+            // console.log(textarea.value);
+
             title_to_change.textContent = input.value;
             text_to_change.textContent = textarea.value;
             title_to_change.classList.toggle("hidden");

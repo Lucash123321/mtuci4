@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from topics.models import Topic
+from django.urls import reverse
 
 def check_permission(request, permission):
     permission = Permission.objects.filter(role=request.user.role, entity='post', permission=permission)
@@ -45,6 +46,7 @@ def create_post(request, topic_slug):
 @login_required
 def edit_post(request, topic_slug, post_id):  # for moderators only | upd by maksanik: "maybe for user who created too?"
     permission = Permission.objects.filter(role=request.user.role, entity='post', permission='edit')
+    print(request.user.role) 
     if request.method == "POST":
         topic = Topic.objects.get(slug=topic_slug)
         post = Post.objects.get(topic=topic, topic_post_id=post_id)
@@ -70,7 +72,8 @@ def delete_post(request, topic_slug, post_id):  # for moderators only | upd by m
             return JsonResponse({'code': 403, 'redirect_url': topic_slug})
 
         post.delete()
-        return JsonResponse({'code': 200, 'redirect_url': topic_slug})
+        redir = reverse('topics:topic', kwargs={'slug': topic_slug,})
+        return JsonResponse({'code': 200, 'redirect_url': redir})
     return JsonResponse({'code': 405})
 
 

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const url = form.action;
             const csrfToken = form.querySelector("[name=csrfmiddlewaretoken]").value;
-            const itemToDelete = form.parentElement.parentElement;
+            const itemToDelete = form.parentElement.parentElement.parentElement;
 
             fetch(url, {
                 method: "POST",
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((data) => {
                 if (data.code === 200) {
                     itemToDelete.remove();  // Remove UI element
-                    // Optionally show a success message or update other elements
+                    location.href = data.redirect_url;
                 } else if (data.code === 404) {
                     // Handle not found case or show a different message
                     console.error('Item not found.');
