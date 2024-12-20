@@ -21,9 +21,10 @@
         class="create-post-form"
         data-parent-type="post"
         data-parent-id="{{ post.id }}">
+        <h2 class="form-title">СОЗДАТЬ ПОСТ</h2>
         {% csrf_token %}
         <label>Введите название поста:</label><br />
-        <input type="text" name="title" placeholder="Введите название..."/><br />
+        <input type="text" name="title" placeholder="Введите название..."/><br /><br />
         <label>Введите текст поста:</label><br />
         <textarea class="adaptive-textarea" name="text" placeholder="Создать пост..."></textarea>
         <button type="submit">Создать</button>
