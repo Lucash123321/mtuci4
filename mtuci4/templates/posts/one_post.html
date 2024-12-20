@@ -1,3 +1,4 @@
+{% load static %}
 {% if topic and user.is_authenticated %}
 <a href="{% url 'topics:posts:post_detail' post.topic.slug post.topic_post_id %}" class="clickable-post">
     {% endif %}
@@ -31,6 +32,7 @@
         <form action="{% url 'posts:edit_post' post.topic.slug post.topic_post_id %}" 
             method="post" 
             class="edit-post-form">
+            <h2>СОЗДАТЬ ПОСТ</h2>
             {% csrf_token %}
         <input type="text" class="adaptive-title-input hidden" name="title" value="{{ post.title }}">
         <textarea class="adaptive-textarea hidden" name="text">{{ post.text }}</textarea>
@@ -43,7 +45,10 @@
                     <div>
                 {% include "posts/vote_form.html" with type='post' %}
                     </div>
-                <p>Показать комментарии</p>          
+                <div class="comment-button">
+                    <img class="comment-svg" src="{% static 'images/comment.svg' %}" />
+                    <span class="comments-count">{{post.comments.all.count}}</span>
+                </div>
                 </div>
             {% elif not topic %}
                 {% include "posts/vote_form.html" with type='post' %}
