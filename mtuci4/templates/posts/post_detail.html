@@ -10,7 +10,9 @@
     <body>
         {% include "includes/header.html" %}
         <main>
-        <a id="back_button" href="javascript:history.back()">GO BACK</a>
+        <a href="javascript:history.back()">
+            <img id="back_button" src="{% static 'images/go-back-arrow.svg' %}">
+        </a>
         {% include "posts/one_post.html" %}
         </main>
     </body>

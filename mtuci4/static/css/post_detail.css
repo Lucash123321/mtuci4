@@ -16,10 +16,10 @@ a {
 #back_button {
     display: block;
     position: relative;
-    left: 40px;
-    top: 20px;
-    font-size: 30px;
-    font-weight: 600
+    width: 80px;
+    height: auto;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 

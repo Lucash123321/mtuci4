@@ -7,10 +7,10 @@
                 method="post" 
                 class="delete-comment-form">
                 {% csrf_token %}
-                <button type="sumbit">Удалить</button>
+                <button class="button" type="submit">Удалить</button>
             </form>
 
-            <button class="show-edit-elements">Редактировать</button>
+            <button class="button show-edit-elements">Редактировать</button>
 
             <div class="comment-header">
             <img />
@@ -23,7 +23,7 @@
             <p class="comment-text">{{ reply.text }}</p>
                 {% csrf_token %}
             <textarea class="adaptive-textarea hidden" name="comment">{{ reply.text }}</textarea>
-            <button type="sumbit" class="submit-button hidden">Применить</button>
+            <button type="submit" class="button submit-button hidden">Применить</button>
             </form>
             
             {% include "posts/vote_form.html" with type='reply' %}
@@ -35,7 +35,7 @@
                 data-parent-id="{{ reply.id }}">
                 {% csrf_token %}
                 <textarea class="adaptive-textarea" name="comment" placeholder="Ответить..."></textarea>
-                <button type="sumbit">Ответить</button>
+                <button class="button" type="submit">Ответить</button>
             </form>
 
             <small>{{ reply.date }}</small>
