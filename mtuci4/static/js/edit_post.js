@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const button_to_show = button.parentElement.querySelector(".submit-button");
 
         button.addEventListener("click", (event) => {
+            event.preventDefault();
             title_to_hide.classList.toggle("hidden");
             text_to_hide.classList.toggle("hidden");
             input_to_show.classList.toggle("hidden");

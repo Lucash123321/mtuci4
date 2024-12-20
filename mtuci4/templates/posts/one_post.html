@@ -44,6 +44,6 @@
         </form>
         {% endif %}
     </article>
-    {% if topic %}
+{% if topic and user.is_authenticated %}
 </a>
 {% endif %}

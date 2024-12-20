@@ -12,6 +12,7 @@
     {% include "includes/header.html" %}
     <div class="profile-container">
         <h1 class="profile-header">Ваш профиль</h1>
+        <a href="{% url "users:settings" %}">РЕДАКТИРОВАТЬ</a>
         <p>Ник: {{ profile_user.username }}</p>
         <p>Дата регистрации: {{ profile_user.date_joined|date:"F j, Y" }}</p>
         <p>Последний вход: {{ profile_user.last_login|date:"F j, Y, g:i a" }}</p>
