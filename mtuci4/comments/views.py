@@ -13,21 +13,25 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def create_comment(request):
     if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = request.user
-            if request.POST.type == 'post':
-                comment.post = request.POST.get("id")
-            elif request.POST.type == 'parent':
-                comment.parent = request.POST.get("parent")
-            else:
-                JsonResponse({"code": 400})
-            comment.save()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    else:
-        form = CommentForm()
-    return render(request, 'posts/create_comment.html', {'form': form})
+        comment = Comment()
+        comment.user = request.user
+        text = request.POST.get('text')
+        if len(text) == 0:
+            return  JsonResponse({"code": 400})
+        comment.text = text
+        if request.POST.get("type") == 'post':
+            comment.post = Post.objects.get(id=request.POST.get("id"))
+        elif request.POST.get("type") == 'comment':
+            comment.parent = Comment.objects.get(id=request.POST.get("id"))
+            print(text)
+        else:
+            JsonResponse({"code": 400})
+        
+        comment.save()
+        
+        return JsonResponse({"code": 200})
+    
+    return JsonResponse({"code": 405})
 
 
 @login_required

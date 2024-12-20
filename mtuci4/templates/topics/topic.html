@@ -15,8 +15,22 @@
 <main>
 <div class="content">
     <h1 class="topic-title">{{ topic.title }}</h1>
+    <!-- В ПРОЦЕССЕ -->
+    <form action="{% url 'topics:posts:create_post' topic.slug  %}" 
+        method="post" 
+        class="create-post-form"
+        data-parent-type="post"
+        data-parent-id="{{ post.id }}">
+        {% csrf_token %}
+        <label>Введите название поста:</label><br />
+        <input type="text" name="post-title" placeholder="Введите название..."/><br />
+        <label>Введите текст поста:</label><br />
+        <textarea class="adaptive-textarea" name="post-text" placeholder="Создать пост..."></textarea>
+        <button type="sumbit">Создать</button>
+    </form>
     {% include 'posts/posts.html' %}
 </div>
 </main>
+<script src="{% static "js/adaptive_textarea.js" %}"></script>
 </body>
 </html>

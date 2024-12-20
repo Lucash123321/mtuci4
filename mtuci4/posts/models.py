@@ -17,6 +17,7 @@ class Post(models.Model):
 
     class Meta:
         unique_together = ('topic', 'topic_post_id')
+        ordering = ('-id',)
 
     def save(self, *args, **kwargs):
         if not self.topic_post_id:

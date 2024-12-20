@@ -9,13 +9,34 @@
                 {% csrf_token %}
                 <button type="sumbit">Удалить</button>
             </form>
+
+            <button class="show-edit-elements">Редактировать</button>
+
             <div class="comment-header">
             <img />
             <small>{{ comment.user.username }}</small>
             </div>
-            <p>{{ reply.text }}</p>
+
+            <form action="{% url 'comments:edit_comment' comment.id %}" 
+                method="post" 
+                class="edit-comment-form">
+            <p class="comment-text">{{ reply.text }}</p>
+                {% csrf_token %}
+            <textarea class="adaptive-textarea hidden" name="comment">{{ reply.text }}</textarea>
+            <button type="sumbit" class="submit-button hidden">Применить</button>
+            </form>
             
             {% include "posts/vote_form.html" with type='reply' %}
+
+            <form action="{% url 'comments:create_comment' %}" 
+                method="post" 
+                class="create-comment-form"
+                data-parent-type="comment"
+                data-parent-id="{{ reply.id }}">
+                {% csrf_token %}
+                <textarea class="adaptive-textarea" name="comment" placeholder="Ответить..."></textarea>
+                <button type="sumbit">Ответить</button>
+            </form>
 
             <small>{{ reply.date }}</small>
             
