@@ -105,6 +105,19 @@ form, button, textarea, input {
     line-height: 1.6;
 }
 
+.button {
+    font-size: 16px;
+    color: rgba(243, 152, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 4px 0 4px 0;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgb(243, 152, 0);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
 .hidden {
     display: none;
 }
