@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const url = form.action;
             const csrfToken = form.querySelector("[name=csrfmiddlewaretoken]").value;
-            const itemToDelete = form.parentElement.parentElement;
+            const itemToDelete = form.parentElement.parentElement.parentElement;
+            console.log(itemToDelete);
 
             fetch(url, {
                 method: "POST",

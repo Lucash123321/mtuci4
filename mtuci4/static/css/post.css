@@ -26,6 +26,30 @@
     /* color: rgb(255, 255, 255); */
 }
 
+.post-container input {
+    width: 100%;
+    max-width: 100%; /* Ограничение по ширине */
+    min-height: 40px; /* Минимальная высота */
+    overflow: hidden; /* Скрытие полос прокрутки */
+    resize: none; /* Отключение ручного изменения размера */
+    font-family: Arial, sans-serif; /* Пример шрифта */
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box; /* Учитывает padding и border */
+}
+
+.post-container textarea {
+    width: 100%;
+    max-width: 100%; /* Ограничение по ширине */
+    min-height: 40px; /* Минимальная высота */
+    overflow: hidden; /* Скрытие полос прокрутки */
+    resize: none; /* Отключение ручного изменения размера */
+    font-family: Arial, sans-serif; /* Пример шрифта */
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box; /* Учитывает padding и border */
+}
+
 form, button, textarea, input {
     position: relative;
     z-index: 2;

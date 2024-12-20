@@ -3,36 +3,30 @@
     {% endif %}
     <article class="post-container">
         <div class="post-header">
+            <!-- ОТКРЫТЬ РЕДАКТИРОВАНИЕ -->
+            {% if request.user.is_staff or request.user == comment.user %}
+            <button class="show-edit-elements">Редактировать</button>
+            {% endif %}
+
+            <!-- УДАЛЕНИЕ ПОСТА -->
+            {% if request.user.is_staff or request.user == comment.user %}
+            <form action="{% url 'posts:delete_post' post.topic.slug post.topic_post_id %}" 
+                method="post" 
+                class="delete-post-form">
+                
+                {% csrf_token %}
+                <button type="submit">Удалить</button>
+            </form>
+            {% endif %}
+
             <h2 class="post-header">{{ post.title }}</h2>
             <p class="post-meta">Автор: {{ post.user }} | {{ post.date }}</p>
         </div>
         
         <div class="post-text">
-            <p>{{ post.text }}</p>
+            <p>{{ post.text }}</p>  
         </div>
-        {% if user.is_authenticated %}
-        {% include "posts/vote_form.html" with type='post' %}
-        {% if topic %}
-        <p>Показать комментарии</p>
-        {% elif not topic %}
-        {% include "posts/comments.html" with comments=post.comments.all %}
-        {% endif %}
-        {% endif %}
-        <!-- УДАЛЕНИЕ ПОСТА -->
-        {% if request.user.is_staff or request.user == comment.user %}
-        <form action="{% url 'posts:delete_post' post.topic.slug post.topic_post_id %}" 
-            method="post" 
-            class="delete-post-form">
-            
-            {% csrf_token %}
-            <button type="submit">Удалить</button>
-        </form>
-        {% endif %}
 
-
-        <!-- ОТКРЫТЬ РЕДАКТИРОВАНИЕ -->
-        {% if request.user.is_staff or request.user == comment.user %}
-        <button class="show-edit-elements">Редактировать</button>
         <!-- РЕДАКТИРОВАНИЕ ПОСТА -->
         <form action="{% url 'posts:edit_post' post.topic.slug post.topic_post_id %}" 
             method="post" 
@@ -42,6 +36,14 @@
         <textarea class="adaptive-textarea hidden" name="text">{{ post.text }}</textarea>
         <button type="submit" class="submit-button hidden">Применить</button>
         </form>
+
+        {% if user.is_authenticated %}
+        {% include "posts/vote_form.html" with type='post' %}
+            {% if topic %}
+                <p>Показать комментарии</p>
+            {% elif not topic %}
+                {% include "posts/comments.html" with comments=post.comments.all %}
+            {% endif %}
         {% endif %}
     </article>
 {% if topic and user.is_authenticated %}

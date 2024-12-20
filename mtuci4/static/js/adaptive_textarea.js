@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
         adjustHeight(textarea);
 
       });
+      textarea.classList.remove("hidden");
+      adjustHeight(textarea);
+      textarea.classList.add("hidden");
     });
   
 });
