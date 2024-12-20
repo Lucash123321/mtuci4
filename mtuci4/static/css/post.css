@@ -26,7 +26,7 @@
     /* color: rgb(255, 255, 255); */
 }
 
-.post-container input {
+.post-container input, .post-container textarea {
     width: 100%;
     max-width: 100%; /* Ограничение по ширине */
     min-height: 40px; /* Минимальная высота */
@@ -36,18 +36,8 @@
     font-size: 16px;
     padding: 10px;
     box-sizing: border-box; /* Учитывает padding и border */
-}
-
-.post-container textarea {
-    width: 100%;
-    max-width: 100%; /* Ограничение по ширине */
-    min-height: 40px; /* Минимальная высота */
-    overflow: hidden; /* Скрытие полос прокрутки */
-    resize: none; /* Отключение ручного изменения размера */
-    font-family: Arial, sans-serif; /* Пример шрифта */
-    font-size: 16px;
-    padding: 10px;
-    box-sizing: border-box; /* Учитывает padding и border */
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
 form, button, textarea, input {
@@ -75,7 +65,7 @@ form, button, textarea, input {
 
 .post-header button.delete-post-button {
     position: absolute;
-    top: -50px;
+    top: -49px;
     right: 10px;
     padding: 10px;
     font-size: 18px;
@@ -104,6 +94,10 @@ form, button, textarea, input {
 
 .post-text p {
     white-space: pre-wrap;
+}
+
+.footer-section {
+    display: flex;
 }
 
 .post-meta {

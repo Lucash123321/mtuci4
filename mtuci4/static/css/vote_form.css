@@ -5,8 +5,8 @@
     padding: 5px 0;
     border-radius: 50px;
     border: 2px solid aliceblue;
-    background-color: rgba(0, 0, 0, 0.3);
-    max-width: 150px;
+    background-color: #0000004d;
+    width: 150px;
 }
 
 .vote-form .upvotes, .vote-form .downvotes {

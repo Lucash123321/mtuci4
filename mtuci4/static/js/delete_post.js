@@ -19,8 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((data) => {
                 if (data.code === 200) {
                     itemToDelete.remove();  // Remove UI element
-                    // Optionally show a success message or update other elements
-                    console.log(data.redirect_url);
                     location.href = data.redirect_url;
                 } else if (data.code === 404) {
                     // Handle not found case or show a different message

@@ -38,10 +38,15 @@
         </form>
 
         {% if user.is_authenticated %}
-        {% include "posts/vote_form.html" with type='post' %}
             {% if topic %}
-                <p>Показать комментарии</p>
+                <div class="footer-section">
+                    <div>
+                {% include "posts/vote_form.html" with type='post' %}
+                    </div>
+                <p>Показать комментарии</p>          
+                </div>
             {% elif not topic %}
+                {% include "posts/vote_form.html" with type='post' %}
                 {% include "posts/comments.html" with comments=post.comments.all %}
             {% endif %}
         {% endif %}

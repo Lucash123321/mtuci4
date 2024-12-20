@@ -2,8 +2,8 @@
     display: none;
 }
 
-.comment-section {
-    margin-top: 40px;
+.comment-section textarea {
+    margin-top: 15px;
 }
 
 .comment-section li {
