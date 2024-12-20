@@ -7,11 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
     show_buttons.forEach(function (button) {
         button.addEventListener("click", (event) => {
             event.preventDefault();
-            button.parentElement.parentElement.setAttribute(
-                'buffer', 
-                button.parentElement.parentElement.getAttribute('href')
-            )
-            button.parentElement.parentElement.setAttribute('href', '#');
+            if (button.parentElement.parentElement.getAttribute('href') !== '#')
+            {
+                button.parentElement.parentElement.setAttribute(
+                    'buffer', 
+                    button.parentElement.parentElement.getAttribute('href')
+                )
+                button.parentElement.parentElement.setAttribute('href', '#');
+            } else {
+                form.parentElement.parentElement.setAttribute(
+                    'href',
+                    form.parentElement.parentElement.getAttribute('buffer')
+                )
+                form.parentElement.removeAttribute('buffer');
+            }
 
         })
         const title_to_hide = button.parentElement.querySelector(".post-header h2");
@@ -44,12 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-            form.parentElement.parentElement.setAttribute(
-                'href',
-                form.parentElement.parentElement.getAttribute('buffer')
-            )
-            form.parentElement.removeAttribute('buffer');
-
+            if (form.parentElement.parentElement.getAttribute('href') === '#') {
+                form.parentElement.parentElement.setAttribute(
+                    'href',
+                    form.parentElement.parentElement.getAttribute('buffer')
+                )
+                form.parentElement.removeAttribute('buffer');
+            }
             console.log(title_to_change);
             console.log(text_to_change);
             console.log(textarea);
