@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'roles',
     'scores',
     'users',
+    'fingerprints',
 ]
 
 MIDDLEWARE = [

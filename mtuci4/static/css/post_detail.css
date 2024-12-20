@@ -9,6 +9,8 @@ body {
 }
 
 a {
+    display: block;
+    width: min-content;
     color: rgb(243, 152, 0);
     text-decoration: none;
 }
@@ -20,6 +22,10 @@ a {
     height: auto;
     object-fit: cover;
     overflow: hidden;
+}
+
+#back_button:hover {
+    opacity: 0.8;
 }
 
 
