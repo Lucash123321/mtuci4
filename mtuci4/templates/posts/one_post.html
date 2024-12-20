@@ -1,5 +1,7 @@
 {% if topic %}
+{% if user.is_authenticated %}
 <a href="{% url 'topics:posts:post_detail' post.topic.slug post.topic_post_id %}" class="clickable-post">
+{% endif %}
 {% endif %}
     <article class="post-container">
         <div class="post-header">
@@ -10,12 +12,13 @@
         <div class="post-text">
             <p>{{ post.text }}</p>
         </div>
-    
+        {% if user.is_authenticated %}
         {% include "posts/vote_form.html" with type='post' %}
         {% if topic %}
-            <p>Показать комментарии</p>
+        <p>Показать комментарии</p>
         {% elif not topic %}
         {% include "posts/comments.html" with comments=post.comments.all %}
+        {% endif %}
         {% endif %}
     </article>
 {% if topic %}

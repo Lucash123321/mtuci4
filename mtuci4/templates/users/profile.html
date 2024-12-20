@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш профиль</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+<body>
+    {% include "includes/header.html" %}
+    <div class="profile-container">
+        <h1 class="profile-header">Ваш профиль</h1>
+        <p>Ник: {{ profile_user.username }}</p>
+        <p>Дата регистрации: {{ profile_user.date_joined|date:"F j, Y" }}</p>
+        <p>Последний вход: {{ profile_user.last_login|date:"F j, Y, g:i a" }}</p>
+        <h2 class="profile-header">Ваши посты</h2>
+        <section class="posts">
+            {% if posts %}
+                <ul>
+                    {% for post in posts %}
+                        <li>
+                            <a href="{% url 'topics:posts:post_detail' post.topic.slug post.topic_post_id %}">
+                                {{ post.title }}
+                            </a>
+                            <p>{{ post.text|truncatewords:20 }}</p>
+                            <p><small>{{ post.date|date:"F j, Y, g:i a" }}</small></p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Нет постов.</p>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
