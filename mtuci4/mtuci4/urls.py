@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include("topics.urls", namespace='topics')),
     path('', include("scores.urls", namespace='scores')),
     path('comments/', include("comments.urls", namespace='comments')),
+    path('posts/', include("posts.urls", namespace="posts")),
 ]

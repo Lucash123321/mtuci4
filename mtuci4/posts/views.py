@@ -8,6 +8,9 @@ from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
 from topics.models import Topic
 
+def check_permission(request, permission):
+    permission = Permission.objects.filter(role=request.user.role, entity='post', permission=permission)
+    return True if permission else False
 
 # TODO: Адаптировать к текущим реалиям
 @login_required
@@ -48,7 +51,7 @@ def edit_post(request, topic_slug, post_id):  # for moderators only | upd by mak
 
         if not permission and post.user != request.user:
             return JsonResponse({'code': 403})
-
+        
         post.title = request.POST.get("title")
         post.text = request.POST.get("text")
         post.save()
@@ -64,10 +67,10 @@ def delete_post(request, topic_slug, post_id):  # for moderators only | upd by m
         post = Post.objects.get(topic=topic, topic_post_id=post_id)
 
         if not permission and post.user != request.user:
-            return JsonResponse({'code': 403})
+            return JsonResponse({'code': 403, 'redirect_url': topic_slug})
 
         post.delete()
-        return JsonResponse({'code': 200})
+        return JsonResponse({'code': 200, 'redirect_url': topic_slug})
     return JsonResponse({'code': 405})
 
 
