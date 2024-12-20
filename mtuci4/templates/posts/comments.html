@@ -19,6 +19,7 @@
         <li class="comment">
             
             <!-- УДАЛЕНИЕ КОММЕНТАРИЯ -->
+            {% if request.user.is_staff or request.user == comment.user %}
             <form action="{% url 'comments:delete_comment' comment.id %}" 
                 method="post" 
                 class="delete-comment-form">
@@ -26,11 +27,14 @@
                 {% csrf_token %}
                 <button type="sumbit">Удалить</button>
             </form>
+            {% endif %}
 
             <!-- ОТКРЫТЬ РЕДАКТИРОВАНИЕ -->
 
+            {% if request.user.is_staff or request.user == comment.user %}
             <button class="show-edit-elements">Редактировать</button>
-            
+            {% endif %}
+
             <!-- ПОЛЬЗОВАТЕЛЬСКИЕ ДАННЫЕ -->
             <div class="comment-header">
             <img />
@@ -38,6 +42,7 @@
             </div>
 
             <!-- РЕДАКТИРОВАНИЕ КОММЕНТАРИЯ -->
+            {% if request.user.is_staff or request.user == comment.user %}
             <form action="{% url 'comments:edit_comment' comment.id %}" 
                 method="post" 
                 class="edit-comment-form">
@@ -46,6 +51,7 @@
             <textarea class="adaptive-textarea hidden" name="comment">{{ comment.text }}</textarea>
             <button type="sumbit" class="submit-button hidden">Применить</button>
             </form>
+            {% endif %}
             
             <!-- ЛАЙКИ И ДИЗЛАЙКИ -->
             {% include "posts/vote_form.html" with type='comment' %}

@@ -10,6 +10,10 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+def check_permission(request, permission):
+    permission = Permission.objects.filter(role=request.user.role, entity='post', permission=permission)
+    return True if permission else False
+
 @login_required
 def create_comment(request):
     if request.method == 'POST':

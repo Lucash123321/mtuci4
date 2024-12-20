@@ -1,23 +1,49 @@
-{% if topic %}
+{% if topic and user.is_authenticated %}
 <a href="{% url 'topics:posts:post_detail' post.topic.slug post.topic_post_id %}" class="clickable-post">
-{% endif %}
+    {% endif %}
     <article class="post-container">
         <div class="post-header">
             <h2 class="post-header">{{ post.title }}</h2>
             <p class="post-meta">Автор: {{ post.user }} | {{ post.date }}</p>
         </div>
-    
+        
         <div class="post-text">
             <p>{{ post.text }}</p>
         </div>
-    
+        {% if user.is_authenticated %}
         {% include "posts/vote_form.html" with type='post' %}
         {% if topic %}
-            <p>Показать комментарии</p>
+        <p>Показать комментарии</p>
         {% elif not topic %}
         {% include "posts/comments.html" with comments=post.comments.all %}
         {% endif %}
+        {% endif %}
+        <!-- УДАЛЕНИЕ ПОСТА -->
+        {% if request.user.is_staff or request.user == comment.user %}
+        <form action="{% url 'posts:delete_post' post.topic.slug post.topic_post_id %}" 
+            method="post" 
+            class="delete-post-form">
+            
+            {% csrf_token %}
+            <button type="submit">Удалить</button>
+        </form>
+        {% endif %}
+
+
+        <!-- ОТКРЫТЬ РЕДАКТИРОВАНИЕ -->
+        {% if request.user.is_staff or request.user == comment.user %}
+        <button class="show-edit-elements">Редактировать</button>
+        <!-- РЕДАКТИРОВАНИЕ ПОСТА -->
+        <form action="{% url 'posts:edit_post' post.topic.slug post.topic_post_id %}" 
+            method="post" 
+            class="edit-post-form">
+            {% csrf_token %}
+        <input type="text" class="adaptive-title-input hidden" name="title" value="{{ post.title }}">
+        <textarea class="adaptive-textarea hidden" name="text">{{ post.text }}</textarea>
+        <button type="submit" class="submit-button hidden">Применить</button>
+        </form>
+        {% endif %}
     </article>
-{% if topic %}
+    {% if topic %}
 </a>
 {% endif %}
