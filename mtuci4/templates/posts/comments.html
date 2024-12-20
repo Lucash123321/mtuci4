@@ -9,7 +9,7 @@
         data-parent-id="{{ post.id }}">
         {% csrf_token %}
         <textarea class="adaptive-textarea" name="comment" placeholder="Добавить комментарий..."></textarea>
-        <button type="sumbit">Отправить</button>
+        <button class="button" type="submit">Отправить</button>
     </form>
     
 {% if comments %}
@@ -25,14 +25,14 @@
                 class="delete-comment-form">
                 
                 {% csrf_token %}
-                <button type="sumbit">Удалить</button>
+                <button class="button" type="submit">Удалить</button>
             </form>
             {% endif %}
 
             <!-- ОТКРЫТЬ РЕДАКТИРОВАНИЕ -->
 
             {% if request.user.is_staff or request.user == comment.user %}
-            <button class="show-edit-elements">Редактировать</button>
+            <button class="button show-edit-elements">Редактировать</button>
             {% endif %}
 
             <!-- ПОЛЬЗОВАТЕЛЬСКИЕ ДАННЫЕ -->
@@ -49,7 +49,7 @@
             <p class="comment-text">{{ comment.text }}</p>
                 {% csrf_token %}
             <textarea class="adaptive-textarea hidden" name="comment">{{ comment.text }}</textarea>
-            <button type="sumbit" class="submit-button hidden">Применить</button>
+            <button type="submit" class="button submit-button hidden">Применить</button>
             </form>
             {% endif %}
             
@@ -64,7 +64,7 @@
                 data-parent-id="{{ comment.id }}">
                 {% csrf_token %}
                 <textarea class="adaptive-textarea" name="comment" placeholder="Ответить..."></textarea>
-                <button type="sumbit">Ответить</button>
+                <button class="button" type="submit">Ответить</button>
             </form>
             
             <div class="comment-footer">
