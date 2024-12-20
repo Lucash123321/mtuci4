@@ -49,6 +49,10 @@ form, button, textarea, input {
     color: rgb(243, 152, 0);
 }
 
+.post-text p {
+    white-space: pre-wrap;
+}
+
 .post-meta {
     font-size: 16px;
 }
